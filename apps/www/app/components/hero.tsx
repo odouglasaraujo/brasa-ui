@@ -92,7 +92,7 @@ export function Hero() {
       <div className="relative mx-auto max-w-6xl px-6">
         <div className="flex flex-col items-center text-center">
           <a
-            href="#components"
+            href="/componentes"
             className="group mb-8 inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-4 py-1.5 text-sm text-neutral-600 shadow-sm transition-all hover:border-neutral-300 hover:shadow-md animate-fade-in-up"
           >
             <span className="mr-0.5">🇧🇷</span>
@@ -124,7 +124,7 @@ export function Hero() {
             style={{ animationDelay: "0.3s" }}
           >
             <a
-              href="#components"
+              href="/componentes"
               className="group inline-flex items-center gap-2 rounded-xl bg-neutral-950 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-neutral-800 hover:shadow-lg"
             >
               Ver componentes

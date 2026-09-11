@@ -31,7 +31,7 @@ export function CTA() {
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </a>
               <a
-                href="#components"
+                href="/componentes"
                 className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-white/10"
               >
                 Explorar componentes

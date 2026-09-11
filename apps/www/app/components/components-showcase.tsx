@@ -286,7 +286,7 @@ export function ComponentsShowcase() {
 
         <div className="mt-12 text-center">
           <a
-            href="#docs"
+            href="/componentes"
             className="group inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-5 py-2.5 text-sm font-medium text-neutral-600 shadow-sm transition-all hover:border-neutral-300 hover:text-neutral-950 hover:shadow-md"
           >
             Ver todos os componentes
