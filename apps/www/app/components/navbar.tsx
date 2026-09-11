@@ -5,7 +5,7 @@ import { Menu, X, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { label: "Componentes", href: "#components" },
+  { label: "Componentes", href: "/componentes" },
   { label: "AI-Ready", href: "#ai-ready" },
   { label: "Docs", href: "#docs" },
 ];

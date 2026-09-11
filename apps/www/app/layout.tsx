@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "brasa.ui — Componentes brasileiros para a era da IA",
   description:
     "CPF, Pix, CEP, boleto, parcelamento — componentes React prontos para produtos digitais brasileiros. AI-ready.",
-  metadataBase: new URL("https://www-brown-chi.vercel.app"),
+  metadataBase: new URL("https://brasa-ui.vercel.app"),
   openGraph: {
     title: "brasa.ui — Componentes brasileiros para a era da IA",
     description:

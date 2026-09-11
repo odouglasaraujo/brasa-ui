@@ -14,7 +14,8 @@
     "react-dom": "^19",
     "lucide-react": "^0.500",
     "clsx": "^2",
-    "tailwind-merge": "^3"
+    "tailwind-merge": "^3",
+    "brasa.ui": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

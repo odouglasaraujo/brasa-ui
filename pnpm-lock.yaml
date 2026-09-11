@@ -51,6 +51,9 @@ importers:
 
   apps/www:
     dependencies:
+      brasa.ui:
+        specifier: workspace:*
+        version: link:../../packages/ui
       clsx:
         specifier: ^2
         version: 2.1.1
