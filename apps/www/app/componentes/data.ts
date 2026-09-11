@@ -34,7 +34,7 @@ export const COMPONENTS: ComponentDoc[] = [
     tags: ["botao", "acao", "form", "submit"],
     importPath: "brasa.ui",
     propsTable: [
-      { name: "variant", type: '"primary" | "secondary" | "ghost" | "danger"', default: '"primary"', description: "Estilo visual do botao" },
+      { name: "variant", type: '"default" | "primary" | "outline" | "ghost" | "destructive" | "link"', default: '"default"', description: "Estilo visual do botao" },
       { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Tamanho do botao" },
       { name: "loading", type: "boolean", default: "false", description: "Exibe spinner de carregamento" },
       { name: "disabled", type: "boolean", default: "false", description: "Desabilita o botao" },
@@ -45,8 +45,8 @@ export const COMPONENTS: ComponentDoc[] = [
   Continuar
 </Button>
 
-<Button variant="secondary" loading>
-  Processando...
+<Button variant="outline" disabled>
+  Desabilitado
 </Button>`,
   },
   {

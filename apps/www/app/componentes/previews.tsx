@@ -47,10 +47,10 @@ function DialogPreview() {
 export const PREVIEWS: Record<string, React.ReactNode> = {
   button: (
     <div className="flex items-center gap-2 flex-wrap">
-      <Button size="sm">Primario</Button>
-      <Button variant="secondary" size="sm">Secundario</Button>
+      <Button variant="primary" size="sm">Primario</Button>
+      <Button variant="outline" size="sm">Outline</Button>
       <Button variant="ghost" size="sm">Ghost</Button>
-      <Button variant="danger" size="sm">Danger</Button>
+      <Button variant="destructive" size="sm">Destructive</Button>
     </div>
   ),
   input: (
@@ -135,7 +135,7 @@ export const PREVIEWS: Record<string, React.ReactNode> = {
   ),
   dropdown: (
     <Dropdown
-      trigger={<Button variant="secondary" size="sm">Acoes</Button>}
+      trigger={<Button variant="outline" size="sm">Acoes</Button>}
       items={[
         { label: "Editar", value: "edit" },
         { label: "Duplicar", value: "dup" },
