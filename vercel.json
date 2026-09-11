@@ -2,5 +2,7 @@
   "framework": null,
   "installCommand": "pnpm install",
   "buildCommand": "pnpm --filter brasa.ui build && cd apps/www && npx next build",
-  "outputDirectory": "apps/www/out"
+  "outputDirectory": "apps/www/out",
+  "cleanUrls": true,
+  "trailingSlash": false
 }
