@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* Brazilian palette */
+  --color-brasil-green: #059669;
+  --color-brasil-green-light: #10b981;
+  --color-brasil-yellow: #eab308;
+  --color-brasil-yellow-light: #facc15;
+  --color-brasil-blue: #2563eb;
+  --color-brasil-blue-light: #3b82f6;
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.6s ease-out both;
+  --animate-fade-in-up: fade-in-up 0.6s ease-out both;
+  --animate-fade-in-up-slow: fade-in-up 0.8s ease-out both;
+  --animate-pulse-soft: pulse-soft 2s ease-in-out infinite;
+  --animate-blink: blink 1s step-end infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-scan-line: scan-line 2s ease-in-out infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes scan-line {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(100%); opacity: 0; }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-white text-neutral-950 font-sans;
+  }
+
+  ::selection {
+    @apply bg-brasil-green/20 text-neutral-950;
+  }
+}

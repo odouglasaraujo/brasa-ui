@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build
+.next/
+dist/
+.turbo/
+*.tsbuildinfo
+out/
+
+# Environment
+.env
+.env.local
+.env.production.local
+.env.development.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Debug
+npm-debug.log*
+pnpm-debug.log*
+
+# Opensquad (local)
+_opensquad/
+squads/
+
+# Claude (local)
+.claude/

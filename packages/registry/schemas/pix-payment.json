@@ -1,0 +1,34 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "pix-payment",
+  "displayName": "Pix Payment",
+  "description": "Complete Pix payment flow with QR code generation, copy-paste code, countdown timer, and payment status tracking",
+  "locale": "pt-BR",
+  "country": "BR",
+  "category": "payments/pix",
+  "tags": ["pix", "payment", "qrcode", "checkout", "brazil", "instant-payment"],
+  "props": {
+    "amount": { "type": "number", "description": "Payment amount in BRL" },
+    "pixKey": { "type": "string", "description": "Pix key (CPF, CNPJ, email, phone, or random)" },
+    "expiresIn": { "type": "number", "default": 300, "description": "Expiration time in seconds" },
+    "onPayment": { "type": "function", "description": "Called when payment is confirmed" },
+    "onExpired": { "type": "function", "description": "Called when QR code expires" },
+    "beneficiary": { "type": "string", "description": "Name of the payment recipient" }
+  },
+  "behavior": {
+    "currency": "BRL",
+    "decimalSeparator": ",",
+    "thousandSeparator": ".",
+    "qrCodeFormat": "EMV",
+    "copyPaste": true,
+    "countdown": true,
+    "polling": true
+  },
+  "states": ["idle", "qr_generated", "waiting_payment", "paid", "expired", "failed"],
+  "context": {
+    "whenToUse": "For any payment flow targeting Brazilian customers. Pix is the most used payment method in Brazil, accounting for over 40 billion transactions per year.",
+    "whenNotToUse": "For international payments or when Pix is not available as a payment option.",
+    "accessibility": "QR code includes alt text with the Pix copy-paste code. Timer announces remaining time. Payment status changes are announced.",
+    "culturalNote": "Pix is Brazil's instant payment system, launched by the Central Bank in 2020. It operates 24/7, including holidays, and transfers are completed in seconds. It has become the preferred payment method for both online and in-person transactions, surpassing credit cards and boletos."
+  }
+}

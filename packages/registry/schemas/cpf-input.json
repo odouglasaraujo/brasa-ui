@@ -1,0 +1,34 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "cpf-input",
+  "displayName": "CPF Input",
+  "description": "Input field for Brazilian CPF (individual taxpayer number) with automatic mask and mod11 validation",
+  "locale": "pt-BR",
+  "country": "BR",
+  "category": "brazil/identity",
+  "tags": ["cpf", "document", "identity", "brazil", "form", "input", "mask", "validation"],
+  "props": {
+    "value": { "type": "string", "description": "Current input value (masked)" },
+    "onChange": { "type": "function", "description": "Called with the new masked value" },
+    "onValidate": { "type": "function", "description": "Called with validation result (boolean)" },
+    "label": { "type": "string", "default": "CPF" },
+    "placeholder": { "type": "string", "default": "000.000.000-00" },
+    "error": { "type": "string", "description": "Error message to display" },
+    "required": { "type": "boolean", "default": false },
+    "disabled": { "type": "boolean", "default": false }
+  },
+  "behavior": {
+    "mask": "###.###.###-##",
+    "validation": "mod11",
+    "maxLength": 14,
+    "inputMode": "numeric",
+    "autoFormat": true
+  },
+  "states": ["empty", "typing", "valid", "invalid", "disabled"],
+  "context": {
+    "whenToUse": "When collecting a Brazilian individual's tax identification number (CPF). Required for purchases, account creation, and virtually all transactions in Brazil.",
+    "whenNotToUse": "For company tax IDs, use CNPJInput instead. For foreign tax IDs, use a generic tax ID field.",
+    "accessibility": "Announces format hint ('Formato: 000.000.000-00') to screen readers. Validation result is announced as a live region.",
+    "culturalNote": "CPF (Cadastro de Pessoas Físicas) is a unique 11-digit taxpayer identification number assigned to every Brazilian citizen and resident. It is required for virtually all financial transactions, purchases, and government services in Brazil."
+  }
+}

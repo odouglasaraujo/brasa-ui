@@ -1,0 +1,6 @@
+{
+  "name": "@brasa-ui/registry",
+  "version": "0.0.1",
+  "private": true,
+  "description": "AI-readable component schemas for brasa.ui"
+}
