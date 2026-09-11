@@ -24,7 +24,7 @@ import {
   StateSelect,
   PixPayment,
   InstallmentSelect,
-} from "brasa.ui";
+} from "../../../../packages/ui/src";
 import { useState } from "react";
 
 function DialogPreview() {
