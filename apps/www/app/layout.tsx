@@ -5,6 +5,33 @@ export const metadata: Metadata = {
   title: "brasa.ui — Componentes brasileiros para a era da IA",
   description:
     "CPF, Pix, CEP, boleto, parcelamento — componentes React prontos para produtos digitais brasileiros. AI-ready.",
+  metadataBase: new URL("https://brasa-ui.vercel.app"),
+  openGraph: {
+    title: "brasa.ui — Componentes brasileiros para a era da IA",
+    description:
+      "CPF, Pix, CEP, boleto, parcelamento — componentes React prontos para produtos digitais brasileiros. AI-ready.",
+    type: "website",
+    locale: "pt_BR",
+    siteName: "brasa.ui",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "brasa.ui — Componentes brasileiros para a era da IA",
+    description:
+      "CPF, Pix, CEP, boleto, parcelamento — componentes React prontos para produtos digitais brasileiros.",
+  },
+  keywords: [
+    "react",
+    "components",
+    "brazil",
+    "cpf",
+    "pix",
+    "cep",
+    "ui",
+    "typescript",
+    "tailwindcss",
+    "ai",
+  ],
 };
 
 export default function RootLayout({

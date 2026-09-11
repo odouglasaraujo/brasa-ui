@@ -38,7 +38,7 @@ export function Navbar() {
           ))}
           <div className="h-4 w-px bg-neutral-200" />
           <a
-            href="https://github.com/brasa-ui"
+            href="https://github.com/odouglasaraujo/brasa-ui"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-sm text-neutral-500 transition-colors hover:text-neutral-950"

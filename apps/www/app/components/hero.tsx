@@ -76,7 +76,7 @@ export function Hero() {
   const [copied, setCopied] = useState(false);
 
   function handleCopy() {
-    navigator.clipboard.writeText("npx brasa-ui@latest init");
+    navigator.clipboard.writeText("pnpm add brasa.ui");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }
@@ -135,7 +135,7 @@ export function Hero() {
               onClick={handleCopy}
               className="inline-flex items-center gap-2.5 rounded-xl border border-neutral-200 bg-white px-5 py-3 font-mono text-sm text-neutral-600 transition-all hover:border-neutral-300 hover:bg-neutral-50 hover:shadow-md"
             >
-              npx brasa-ui@latest init
+              pnpm add brasa.ui
               {copied ? (
                 <Check className="h-3.5 w-3.5 text-brasil-green" />
               ) : (

@@ -21,7 +21,7 @@ export function CTA() {
 
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
-                href="https://github.com/brasa-ui"
+                href="https://github.com/odouglasaraujo/brasa-ui"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-neutral-950 transition-all hover:bg-white/90"
