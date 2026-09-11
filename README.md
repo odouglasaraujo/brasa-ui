@@ -60,12 +60,6 @@ brasa.ui resolve isso: componentes React prontos + schemas JSON que ensinam a qu
 ## Instalação
 
 ```bash
-npx brasa-ui@latest init
-```
-
-Ou instale manualmente:
-
-```bash
 pnpm add brasa.ui
 ```
 
@@ -120,8 +114,8 @@ E ela sabe o que isso significa — Pix, CPF, parcelamento, R$, CEP, boleto.
 
 ```bash
 # Clone o repo
-git clone https://github.com/brasaui/brasa.ui.git
-cd brasa.ui
+git clone https://github.com/odouglasaraujo/brasa-ui.git
+cd brasa-ui
 
 # Instale dependências
 pnpm install

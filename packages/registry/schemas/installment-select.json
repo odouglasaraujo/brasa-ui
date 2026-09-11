@@ -1,0 +1,35 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "installment-select",
+  "displayName": "Installment Select",
+  "description": "Brazilian installment payment selector with automatic calculation of interest and installment values",
+  "locale": "pt-BR",
+  "country": "BR",
+  "category": "payment",
+  "tags": ["installments", "parcelamento", "payment", "brazil", "checkout", "credit-card"],
+  "props": {
+    "amount": { "type": "number", "required": true, "description": "Total amount in reais" },
+    "maxInstallments": { "type": "number", "default": 12 },
+    "minInstallmentValue": { "type": "number", "default": 5 },
+    "interestRate": { "type": "number", "default": 1.99, "description": "Monthly interest rate percentage" },
+    "freeInstallments": { "type": "number", "default": 3, "description": "Number of interest-free installments" },
+    "onChange": { "type": "function", "signature": "(option: InstallmentOption) => void" },
+    "value": { "type": "number", "description": "Selected number of installments" },
+    "label": { "type": "string", "default": "Parcelamento" }
+  },
+  "behavior": {
+    "calculation": "Generates options from 1x to maxInstallments, applying compound interest after freeInstallments",
+    "minimumValue": "Stops generating options when installment value drops below minInstallmentValue",
+    "display": "Shows 'sem juros' badge for interest-free, 'à vista' for 1x, total with interest for others"
+  },
+  "states": [
+    { "name": "selected", "description": "One installment option is selected (green border + radio)" },
+    { "name": "unselected", "description": "Default state for non-selected options" }
+  ],
+  "context": {
+    "whenToUse": "In any Brazilian checkout flow where credit card payment with installments is offered",
+    "whenNotToUse": "For Pix or boleto payments (those are single-payment). For non-Brazilian checkouts",
+    "accessibility": "Uses radiogroup role with aria-checked on each option",
+    "culturalNote": "Parcelamento (installments) is a cornerstone of Brazilian e-commerce. Most purchases over ~R$ 100 are split into 2-12 monthly installments on credit cards. 'Sem juros' (interest-free) is a major selling point. Stores absorb the interest to attract customers. '10x de R$ 14,99 sem juros' is the standard display format."
+  }
+}

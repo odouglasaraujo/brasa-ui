@@ -1,0 +1,37 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "cep-input",
+  "displayName": "CEP Input",
+  "description": "Input field for Brazilian postal code (CEP) with automatic address lookup via ViaCEP API",
+  "locale": "pt-BR",
+  "country": "BR",
+  "category": "brazil/address",
+  "tags": ["cep", "postal-code", "address", "brazil", "form", "viacep"],
+  "props": {
+    "value": { "type": "string" },
+    "onChange": { "type": "function", "signature": "(masked: string, raw: string) => void" },
+    "onAddress": { "type": "function", "signature": "(address: CEPAddress | null) => void" },
+    "label": { "type": "string", "default": "CEP" },
+    "error": { "type": "string" },
+    "autoFetch": { "type": "boolean", "default": true }
+  },
+  "behavior": {
+    "mask": "#####-###",
+    "validation": "8 digits, format XXXXX-XXX",
+    "maxLength": 9,
+    "inputMode": "numeric",
+    "autoFetch": "When autoFetch=true and CEP is valid, fetches address from ViaCEP API automatically"
+  },
+  "states": [
+    { "name": "idle", "description": "Empty or incomplete CEP" },
+    { "name": "loading", "description": "Fetching address from ViaCEP" },
+    { "name": "found", "description": "Valid CEP, address data displayed" },
+    { "name": "not_found", "description": "Valid format but CEP does not exist" }
+  ],
+  "context": {
+    "whenToUse": "When collecting a Brazilian address — CEP auto-fills street, neighborhood, city and state",
+    "whenNotToUse": "For international addresses or when you already have the full address",
+    "accessibility": "Announces loading state and address result to screen readers",
+    "culturalNote": "CEP (Código de Endereçamento Postal) is Brazil's 8-digit postal code. Entering it auto-fills the rest of the address via ViaCEP, a free public API. This is standard UX in Brazilian e-commerce."
+  }
+}

@@ -3,6 +3,33 @@
   "version": "0.0.1",
   "description": "Brazilian UI components for the AI era",
   "license": "MIT",
+  "author": "Douglas Araujo <douglasp.araujo96@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/odouglasaraujo/brasa-ui.git",
+    "directory": "packages/ui"
+  },
+  "homepage": "https://github.com/odouglasaraujo/brasa-ui",
+  "bugs": {
+    "url": "https://github.com/odouglasaraujo/brasa-ui/issues"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "brazil",
+    "brasil",
+    "ui",
+    "cpf",
+    "pix",
+    "cep",
+    "boleto",
+    "parcelamento",
+    "brl",
+    "typescript",
+    "tailwindcss",
+    "ai",
+    "ai-ready"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

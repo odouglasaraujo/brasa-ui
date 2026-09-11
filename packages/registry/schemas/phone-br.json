@@ -1,0 +1,30 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "phone-br",
+  "displayName": "Phone BR",
+  "description": "Brazilian phone number input with country flag, +55 prefix, DDD area code and automatic mask",
+  "locale": "pt-BR",
+  "country": "BR",
+  "category": "brazil/contact",
+  "tags": ["phone", "telephone", "ddd", "brazil", "form", "contact"],
+  "props": {
+    "value": { "type": "string" },
+    "onChange": { "type": "function", "signature": "(masked: string, raw: string) => void" },
+    "onValidate": { "type": "function", "signature": "(valid: boolean) => void" },
+    "label": { "type": "string", "default": "Telefone" },
+    "error": { "type": "string" }
+  },
+  "behavior": {
+    "mask": "(##) #####-####",
+    "validation": "10-11 digits: 2-digit DDD + 8 or 9 digit number",
+    "maxLength": 15,
+    "inputMode": "tel",
+    "prefix": "🇧🇷 +55 (visual, not part of the value)"
+  },
+  "context": {
+    "whenToUse": "When collecting a Brazilian phone number with DDD area code",
+    "whenNotToUse": "For international phone numbers or numbers without DDD",
+    "accessibility": "Flag and +55 prefix are decorative, input is labeled with 'Telefone'",
+    "culturalNote": "Brazilian phone numbers have a 2-digit DDD (area code) followed by 8 digits (landline) or 9 digits (mobile, starting with 9). Mobile numbers always start with 9 after the DDD. The +55 country code is shown but not included in the input value."
+  }
+}

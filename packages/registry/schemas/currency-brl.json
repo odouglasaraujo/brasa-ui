@@ -1,0 +1,30 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "currency-brl",
+  "displayName": "Currency BRL",
+  "description": "Monetary input formatted in Brazilian Real (R$) with optional installment display",
+  "locale": "pt-BR",
+  "country": "BR",
+  "category": "brazil/finance",
+  "tags": ["currency", "money", "brl", "real", "brazil", "form", "installments"],
+  "props": {
+    "value": { "type": "number", "description": "Value in reais (not cents)" },
+    "onChange": { "type": "function", "signature": "(value: number, formatted: string) => void" },
+    "label": { "type": "string", "default": "Valor" },
+    "error": { "type": "string" },
+    "showInstallments": { "type": "boolean", "default": false },
+    "maxInstallments": { "type": "number", "default": 10 }
+  },
+  "behavior": {
+    "inputMode": "numeric",
+    "prefix": "R$",
+    "format": "Brazilian locale: dot for thousands, comma for decimals (R$ 1.499,90)",
+    "internalStorage": "Stores value in cents internally, converts to reais on output"
+  },
+  "context": {
+    "whenToUse": "Any input that accepts monetary values in Brazilian Real",
+    "whenNotToUse": "For USD or other currencies",
+    "accessibility": "R$ prefix is visually separate, input announces currency context",
+    "culturalNote": "Brazil uses comma as decimal separator and dot as thousands separator. R$ 1.499,90 means one thousand four hundred ninety-nine reais and ninety centavos. Installment display ('10x de R$ 149,99 sem juros') is standard in Brazilian e-commerce."
+  }
+}
