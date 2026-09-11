@@ -17,12 +17,13 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-neutral-200 bg-white/80 backdrop-blur-xl">
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <a href="/" className="flex items-center gap-2.5 group">
-          <div className="relative flex h-7 w-7 items-center justify-center rounded-lg overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-brasil-green via-brasil-yellow to-brasil-blue" />
-            <span className="relative text-xs font-bold text-white">B</span>
+          <div className="flex gap-[3px]">
+            <div className="h-6 w-[5px] rounded-full bg-brasil-green" />
+            <div className="h-6 w-[5px] rounded-full bg-brasil-yellow" />
+            <div className="h-6 w-[5px] rounded-full bg-brasil-blue" />
           </div>
           <span className="text-[15px] font-semibold tracking-tight text-neutral-950">
-            brasa<span className="bg-gradient-to-r from-brasil-green via-brasil-yellow to-brasil-blue bg-clip-text text-transparent">.ui</span>
+            brasa.ui
           </span>
         </a>
 

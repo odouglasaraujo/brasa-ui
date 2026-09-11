@@ -3,12 +3,13 @@ export function Footer() {
     <footer className="border-t border-neutral-200 py-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 md:flex-row">
         <div className="flex items-center gap-2">
-          <div className="flex h-6 w-6 items-center justify-center rounded-md overflow-hidden relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-brasil-green via-brasil-yellow to-brasil-blue" />
-            <span className="relative text-[10px] font-bold text-white">B</span>
+          <div className="flex gap-[3px]">
+            <div className="h-5 w-[4px] rounded-full bg-brasil-green" />
+            <div className="h-5 w-[4px] rounded-full bg-brasil-yellow" />
+            <div className="h-5 w-[4px] rounded-full bg-brasil-blue" />
           </div>
           <span className="text-sm font-semibold text-neutral-950">
-            brasa<span className="bg-gradient-to-r from-brasil-green via-brasil-yellow to-brasil-blue bg-clip-text text-transparent">.ui</span>
+            brasa.ui
           </span>
         </div>
 

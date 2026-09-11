@@ -34,3 +34,4 @@ squads/
 
 # Claude (local)
 .claude/
+.vercel
