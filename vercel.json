@@ -1,6 +1,5 @@
 {
   "installCommand": "pnpm install",
   "buildCommand": "pnpm --filter brasa.ui build && cd apps/www && next build",
-  "outputDirectory": "apps/www/.next",
-  "framework": "nextjs"
+  "outputDirectory": "apps/www/out"
 }
