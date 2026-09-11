@@ -122,9 +122,9 @@ export const PREVIEWS: Record<string, React.ReactNode> = {
   ),
   avatar: (
     <div className="flex items-center gap-3">
-      <Avatar name="Maria S" size="sm" />
-      <Avatar name="Joao P" size="md" />
-      <Avatar name="Ana R" size="lg" />
+      <Avatar fallback="Maria S" size="sm" />
+      <Avatar fallback="Joao P" size="md" />
+      <Avatar fallback="Ana R" size="lg" />
     </div>
   ),
   separator: (
@@ -182,9 +182,9 @@ export const PREVIEWS: Record<string, React.ReactNode> = {
   "pix-payment": (
     <div className="w-full max-w-[280px]">
       <PixPayment
-        code="00020126580014br.gov.bcb.pix0136demo"
+        pixCode="00020126580014br.gov.bcb.pix0136demo"
         amount={14990}
-        status="pending"
+        status="qr_generated"
       />
     </div>
   ),
@@ -193,7 +193,7 @@ export const PREVIEWS: Record<string, React.ReactNode> = {
       <InstallmentSelect
         amount={67970}
         maxInstallments={6}
-        interestFreeInstallments={3}
+        freeInstallments={3}
         interestRate={1.99}
         onChange={() => {}}
       />

@@ -276,13 +276,13 @@ export const COMPONENTS: ComponentDoc[] = [
     importPath: "brasa.ui",
     propsTable: [
       { name: "src", type: "string", default: "-", description: "URL da imagem" },
-      { name: "name", type: "string", default: "-", description: "Nome para gerar iniciais" },
+      { name: "fallback", type: "string", default: "-", description: "Nome para gerar iniciais (fallback)" },
       { name: "size", type: '"sm" | "md" | "lg" | "xl"', default: '"md"', description: "Tamanho do avatar" },
     ],
     codeExample: `import { Avatar } from "brasa.ui";
 
-<Avatar name="Maria Silva" size="lg" />
-<Avatar src="/foto.jpg" name="Joao" size="md" />`,
+<Avatar fallback="Maria Silva" size="lg" />
+<Avatar src="/foto.jpg" alt="Joao" size="md" />`,
   },
   {
     slug: "separator",
@@ -494,18 +494,18 @@ export const COMPONENTS: ComponentDoc[] = [
     tags: ["pix", "pagamento", "qrcode", "transferencia"],
     importPath: "brasa.ui",
     propsTable: [
-      { name: "code", type: "string", default: "-", description: "Codigo Pix copia-e-cola" },
-      { name: "amount", type: "number", default: "-", description: "Valor em centavos" },
-      { name: "status", type: '"pending" | "processing" | "confirmed" | "expired"', default: '"pending"', description: "Status do pagamento" },
-      { name: "expiresAt", type: "Date", default: "-", description: "Data de expiracao" },
+      { name: "pixCode", type: "string", default: "-", description: "Codigo Pix copia-e-cola" },
+      { name: "amount", type: "number", default: "-", description: "Valor em reais" },
+      { name: "status", type: '"idle" | "qr_generated" | "waiting_payment" | "paid" | "expired" | "failed"', default: '"idle"', description: "Status do pagamento" },
+      { name: "beneficiary", type: "string", default: "-", description: "Nome do beneficiario" },
     ],
     codeExample: `import { PixPayment } from "brasa.ui";
 
 <PixPayment
-  code="00020126580014br.gov.bcb.pix..."
-  amount={14990}
-  status="pending"
-  expiresAt={new Date(Date.now() + 30 * 60 * 1000)}
+  pixCode="00020126580014br.gov.bcb.pix..."
+  amount={149.90}
+  status="qr_generated"
+  beneficiary="Loja Exemplo"
 />`,
     aiContext: "Pix e o sistema de pagamentos instantaneos do Banco Central do Brasil, lancado em 2020. Ja e o meio de pagamento mais usado no Brasil, superando cartoes e boletos.",
   },
@@ -519,7 +519,7 @@ export const COMPONENTS: ComponentDoc[] = [
     propsTable: [
       { name: "amount", type: "number", default: "-", description: "Valor total em centavos" },
       { name: "maxInstallments", type: "number", default: "12", description: "Maximo de parcelas" },
-      { name: "interestFreeInstallments", type: "number", default: "3", description: "Parcelas sem juros" },
+      { name: "freeInstallments", type: "number", default: "3", description: "Parcelas sem juros" },
       { name: "interestRate", type: "number", default: "1.99", description: "Taxa de juros mensal (%)" },
     ],
     codeExample: `import { InstallmentSelect } from "brasa.ui";
@@ -527,7 +527,7 @@ export const COMPONENTS: ComponentDoc[] = [
 <InstallmentSelect
   amount={67970}
   maxInstallments={12}
-  interestFreeInstallments={3}
+  freeInstallments={3}
   interestRate={1.99}
   onChange={(option) => {
     console.log(option.installments); // 3
