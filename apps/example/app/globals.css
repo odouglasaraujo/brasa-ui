@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@source "../../packages/ui/src/**/*.tsx";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  --color-brasil-green: #059669;
+  --color-brasil-green-light: #10b981;
+  --color-brasil-yellow: #eab308;
+  --color-brasil-yellow-light: #facc15;
+  --color-brasil-blue: #2563eb;
+  --color-brasil-blue-light: #3b82f6;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900 font-sans;
+  }
+}
