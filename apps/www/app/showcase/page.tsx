@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, Wallet } from "lucide-react";
+import { ArrowRight, Wallet, Layers } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Showcase — brasa.ui",
@@ -13,6 +13,19 @@ const showcases = [
     description: "Fintech brasileira com conta digital, Pix, cartão e parcelamento. Landing page completa com formulário de abertura de conta.",
     tags: ["Fintech", "Landing Page", "Pix", "CPF", "CEP"],
     color: "emerald",
+    icon: Wallet,
+    gradient: "from-emerald-50 to-emerald-100/50",
+    iconBg: "bg-emerald-600 shadow-emerald-200",
+  },
+  {
+    slug: "orion",
+    name: "Orion",
+    description: "SaaS de infraestrutura bancária com core banking, Pix API, Open Finance e compliance. Design dark premium.",
+    tags: ["SaaS B2B", "Banking", "Dark Theme", "API", "KYC"],
+    color: "indigo",
+    icon: Layers,
+    gradient: "from-[#0c0c18] to-[#12121f]",
+    iconBg: "bg-gradient-to-br from-indigo-500 to-violet-600 shadow-indigo-300",
   },
 ];
 
@@ -61,9 +74,9 @@ export default function ShowcasePage() {
               href={`/showcase/${s.slug}`}
               className="group flex flex-col rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all hover:border-neutral-300 hover:shadow-lg hover:-translate-y-0.5"
             >
-              <div className="flex min-h-[180px] items-center justify-center rounded-t-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/50 p-6">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-600 shadow-lg shadow-emerald-200">
-                  <Wallet className="h-8 w-8 text-white" />
+              <div className={`flex min-h-[180px] items-center justify-center rounded-t-2xl bg-gradient-to-br ${s.gradient} p-6`}>
+                <div className={`flex h-16 w-16 items-center justify-center rounded-2xl ${s.iconBg} shadow-lg`}>
+                  <s.icon className="h-8 w-8 text-white" />
                 </div>
               </div>
               <div className="flex flex-1 flex-col p-5">
