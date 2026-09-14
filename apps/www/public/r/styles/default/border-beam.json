@@ -1,0 +1,14 @@
+{
+  "name": "border-beam",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/border-beam.tsx",
+      "content": "import { forwardRef, type HTMLAttributes } from \"react\";\n\nexport interface BorderBeamProps extends HTMLAttributes<HTMLDivElement> {\n  size?: number;\n  duration?: number;\n  borderWidth?: number;\n  colorFrom?: string;\n  colorTo?: string;\n  delay?: number;\n}\n\nexport const BorderBeam = forwardRef<HTMLDivElement, BorderBeamProps>(\n  (\n    {\n      className = \"\",\n      size = 200,\n      duration = 12,\n      borderWidth = 1.5,\n      colorFrom = \"#059669\",\n      colorTo = \"#eab308\",\n      delay = 0,\n      ...props\n    },\n    ref\n  ) => {\n    return (\n      <div\n        ref={ref}\n        className={`pointer-events-none absolute inset-0 rounded-[inherit] ${className}`}\n        style={\n          {\n            \"--border-beam-size\": `${size}px`,\n            \"--border-beam-duration\": `${duration}s`,\n            \"--border-beam-delay\": `${delay}s`,\n            \"--border-beam-from\": colorFrom,\n            \"--border-beam-to\": colorTo,\n            \"--border-beam-width\": `${borderWidth}px`,\n          } as React.CSSProperties\n        }\n        {...props}\n      >\n        <div\n          style={{\n            position: \"absolute\",\n            inset: 0,\n            borderRadius: \"inherit\",\n            maskImage: `conic-gradient(from 0deg, transparent 0%, transparent 10%, black 36%)`,\n            WebkitMaskImage: `conic-gradient(from 0deg, transparent 0%, transparent 10%, black 36%)`,\n            border: `var(--border-beam-width) solid transparent`,\n            backgroundClip: \"border-box\",\n            backgroundOrigin: \"border-box\",\n            background: `conic-gradient(from calc(var(--border-beam-angle, 0) * 1deg), transparent, var(--border-beam-from), var(--border-beam-to), transparent) border-box`,\n            animation: `border-beam-rotate var(--border-beam-duration) linear infinite`,\n            animationDelay: `var(--border-beam-delay)`,\n          }}\n        />\n        <style>{`\n          @keyframes border-beam-rotate {\n            from { --border-beam-angle: 0; }\n            to { --border-beam-angle: 360; }\n          }\n          @property --border-beam-angle {\n            syntax: \"<number>\";\n            initial-value: 0;\n            inherits: false;\n          }\n        `}</style>\n      </div>\n    );\n  }\n);\n\nBorderBeam.displayName = \"BorderBeam\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

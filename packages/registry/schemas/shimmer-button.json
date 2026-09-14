@@ -1,0 +1,20 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "shimmer-button",
+  "displayName": "Shimmer Button",
+  "description": "Eye-catching CTA button with a rotating shimmer/glow border effect. Zero dependencies, pure CSS animation.",
+  "category": "core/buttons",
+  "tags": ["button", "shimmer", "glow", "cta", "animation", "landing"],
+  "props": {
+    "children": { "type": "ReactNode", "required": true },
+    "shimmerColor": { "type": "string", "default": "#059669", "description": "Color of the shimmer effect" },
+    "shimmerSize": { "type": "string", "default": "0.1em" },
+    "shimmerDuration": { "type": "string", "default": "2.5s" },
+    "background": { "type": "string", "default": "rgba(0, 0, 0, 0.9)" },
+    "borderRadius": { "type": "string", "default": "12px" }
+  },
+  "context": {
+    "whenToUse": "Primary CTAs on landing pages, hero sections, important actions that need visual emphasis",
+    "whenNotToUse": "For regular form buttons or secondary actions — use the standard Button component"
+  }
+}

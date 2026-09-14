@@ -1,0 +1,14 @@
+{
+  "name": "avatar-circles",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/avatar-circles.tsx",
+      "content": "import { forwardRef, type HTMLAttributes } from \"react\";\n\nexport interface AvatarCircle {\n  src: string;\n  alt?: string;\n}\n\nexport interface AvatarCirclesProps extends HTMLAttributes<HTMLDivElement> {\n  avatars: AvatarCircle[];\n  size?: \"sm\" | \"md\" | \"lg\";\n  max?: number;\n  borderColor?: string;\n}\n\nconst sizeConfig = {\n  sm: { dimension: 28, text: \"text-[10px]\", overlap: \"-ml-2\" },\n  md: { dimension: 36, text: \"text-xs\", overlap: \"-ml-3\" },\n  lg: { dimension: 44, text: \"text-sm\", overlap: \"-ml-3.5\" },\n} as const;\n\nexport const AvatarCircles = forwardRef<HTMLDivElement, AvatarCirclesProps>(\n  (\n    {\n      className = \"\",\n      avatars,\n      size = \"md\",\n      max = 5,\n      borderColor = \"white\",\n      ...props\n    },\n    ref\n  ) => {\n    const config = sizeConfig[size];\n    const visible = avatars.slice(0, max);\n    const remaining = avatars.length - max;\n\n    return (\n      <div\n        ref={ref}\n        className={`flex items-center ${className}`}\n        {...props}\n      >\n        {visible.map((avatar, i) => (\n          <img\n            key={i}\n            src={avatar.src}\n            alt={avatar.alt || \"\"}\n            width={config.dimension}\n            height={config.dimension}\n            className={`rounded-full ${i > 0 ? config.overlap : \"\"}`}\n            style={{\n              border: `2px solid ${borderColor}`,\n              width: config.dimension,\n              height: config.dimension,\n              objectFit: \"cover\",\n            }}\n          />\n        ))}\n        {remaining > 0 && (\n          <div\n            className={`flex items-center justify-center rounded-full bg-neutral-100 font-medium text-neutral-600 ${config.overlap} ${config.text}`}\n            style={{\n              border: `2px solid ${borderColor}`,\n              width: config.dimension,\n              height: config.dimension,\n            }}\n          >\n            +{remaining}\n          </div>\n        )}\n      </div>\n    );\n  }\n);\n\nAvatarCircles.displayName = \"AvatarCircles\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

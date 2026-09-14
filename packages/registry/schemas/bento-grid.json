@@ -1,0 +1,25 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "bento-grid",
+  "displayName": "Bento Grid",
+  "description": "Modern grid layout component with BentoCard children. Responsive columns with optional span for featured items.",
+  "category": "core/layout",
+  "tags": ["bento", "grid", "layout", "cards", "features", "landing"],
+  "props": {
+    "BentoGrid": {
+      "children": { "type": "ReactNode", "required": true },
+      "columns": { "type": "number", "enum": [2, 3, 4], "default": 3 }
+    },
+    "BentoCard": {
+      "title": { "type": "string", "required": true },
+      "description": { "type": "string" },
+      "icon": { "type": "ReactNode" },
+      "span": { "type": "number", "enum": [1, 2], "default": 1, "description": "Column span for featured cards" },
+      "children": { "type": "ReactNode", "description": "Additional content below description" }
+    }
+  },
+  "context": {
+    "whenToUse": "Feature sections, product showcases, dashboard overviews, landing page blocks",
+    "whenNotToUse": "For simple lists or uniform card grids without hierarchy"
+  }
+}

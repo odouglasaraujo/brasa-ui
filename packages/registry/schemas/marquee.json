@@ -1,0 +1,20 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "marquee",
+  "displayName": "Marquee",
+  "description": "Infinite scrolling component for testimonials, logos, or any repeating content. CSS-only animation, zero dependencies.",
+  "category": "core/animation",
+  "tags": ["marquee", "scroll", "infinite", "testimonials", "logos", "animation"],
+  "props": {
+    "children": { "type": "ReactNode", "required": true, "description": "Content to scroll infinitely" },
+    "reverse": { "type": "boolean", "default": false, "description": "Reverse scroll direction" },
+    "pauseOnHover": { "type": "boolean", "default": false, "description": "Pause animation on hover" },
+    "vertical": { "type": "boolean", "default": false, "description": "Scroll vertically instead of horizontally" },
+    "repeat": { "type": "number", "default": 4, "description": "Number of content repetitions for seamless loop" },
+    "duration": { "type": "string", "default": "40s", "description": "CSS duration for one full cycle" }
+  },
+  "context": {
+    "whenToUse": "Landing page social proof sections, logo bars, testimonial carousels, scrolling banners",
+    "whenNotToUse": "When content should be individually readable or interactive — use a carousel instead"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "progress",
+  "displayName": "Progress",
+  "description": "Progress bar with shimmer animation and step progress variant. Includes Progress (bar) and StepProgress (multi-step indicator).",
+  "category": "core/feedback",
+  "tags": ["progress", "bar", "steps", "loading", "status"],
+  "props": {
+    "Progress": {
+      "value": { "type": "number", "required": true },
+      "max": { "type": "number", "default": 100 },
+      "variant": { "type": "string", "enum": ["default", "success", "warning", "danger"], "default": "default" },
+      "size": { "type": "string", "enum": ["sm", "md", "lg"], "default": "md" },
+      "showLabel": { "type": "boolean", "default": false },
+      "label": { "type": "string" },
+      "animated": { "type": "boolean", "default": true }
+    },
+    "StepProgress": {
+      "steps": { "type": "string[]", "required": true },
+      "currentStep": { "type": "number", "required": true, "description": "0-indexed current step" }
+    }
+  },
+  "context": {
+    "whenToUse": "File uploads, multi-step forms, onboarding flows, checkout progress, loading states",
+    "whenNotToUse": "For indeterminate loading — use Skeleton or a spinner instead"
+  }
+}

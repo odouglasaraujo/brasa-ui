@@ -1,0 +1,14 @@
+{
+  "name": "retro-grid",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/retro-grid.tsx",
+      "content": "import { forwardRef, type HTMLAttributes } from \"react\";\n\nexport interface RetroGridProps extends HTMLAttributes<HTMLDivElement> {\n  angle?: number;\n  lineColor?: string;\n}\n\nexport const RetroGrid = forwardRef<HTMLDivElement, RetroGridProps>(\n  ({ className = \"\", angle = 65, lineColor = \"rgba(0,0,0,0.08)\", ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        className={`pointer-events-none absolute inset-0 overflow-hidden [perspective:200px] ${className}`}\n        {...props}\n      >\n        <div\n          className=\"absolute inset-0\"\n          style={{\n            transform: `rotateX(${angle}deg)`,\n            backgroundImage: `linear-gradient(${lineColor} 1px, transparent 1px), linear-gradient(90deg, ${lineColor} 1px, transparent 1px)`,\n            backgroundSize: \"60px 30px\",\n            backgroundPosition: \"center center\",\n            animation: \"retro-grid-scroll 20s linear infinite\",\n            transformOrigin: \"center center\",\n            top: \"-50%\",\n            left: \"-50%\",\n            right: \"-50%\",\n            bottom: \"-120%\",\n          }}\n        />\n        <div\n          className=\"absolute inset-0\"\n          style={{\n            background: \"linear-gradient(to bottom, transparent 40%, white 100%)\",\n          }}\n        />\n        <style>{`\n          @keyframes retro-grid-scroll {\n            from { background-position: center 0; }\n            to { background-position: center 30px; }\n          }\n        `}</style>\n      </div>\n    );\n  }\n);\n\nRetroGrid.displayName = \"RetroGrid\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

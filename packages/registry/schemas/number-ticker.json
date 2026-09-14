@@ -1,0 +1,20 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "number-ticker",
+  "displayName": "Number Ticker",
+  "description": "Animated number counter that counts up (or down) when scrolled into view. Uses Intl.NumberFormat for locale-aware formatting.",
+  "category": "core/animation",
+  "tags": ["number", "counter", "ticker", "animation", "stats", "metrics"],
+  "props": {
+    "value": { "type": "number", "required": true, "description": "Target number to animate to" },
+    "direction": { "type": "string", "enum": ["up", "down"], "default": "up" },
+    "delay": { "type": "number", "default": 0, "description": "Delay in ms before animation starts" },
+    "duration": { "type": "number", "default": 2000, "description": "Animation duration in ms" },
+    "formatOptions": { "type": "Intl.NumberFormatOptions", "description": "Intl.NumberFormat options (e.g., style: 'currency', currency: 'BRL')" },
+    "locale": { "type": "string", "default": "pt-BR", "description": "Locale for number formatting" }
+  },
+  "context": {
+    "whenToUse": "Stats sections, dashboards, KPI displays, landing page metrics",
+    "whenNotToUse": "For static numbers that don't need animation"
+  }
+}

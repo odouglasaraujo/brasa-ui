@@ -1,0 +1,14 @@
+{
+  "name": "marquee",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/marquee.tsx",
+      "content": "import { forwardRef, type HTMLAttributes, type ReactNode } from \"react\";\n\nexport interface MarqueeProps extends HTMLAttributes<HTMLDivElement> {\n  children: ReactNode;\n  reverse?: boolean;\n  pauseOnHover?: boolean;\n  vertical?: boolean;\n  repeat?: number;\n  duration?: string;\n}\n\nexport const Marquee = forwardRef<HTMLDivElement, MarqueeProps>(\n  (\n    {\n      className = \"\",\n      children,\n      reverse = false,\n      pauseOnHover = false,\n      vertical = false,\n      repeat = 4,\n      duration = \"40s\",\n      ...props\n    },\n    ref\n  ) => {\n    return (\n      <div\n        ref={ref}\n        className={`group flex overflow-hidden [--gap:1rem] ${\n          vertical ? \"flex-col\" : \"flex-row\"\n        } ${className}`}\n        style={\n          {\n            \"--duration\": duration,\n            gap: \"var(--gap)\",\n          } as React.CSSProperties\n        }\n        {...props}\n      >\n        {Array.from({ length: repeat }).map((_, i) => (\n          <div\n            key={i}\n            className={`flex shrink-0 justify-around ${\n              vertical ? \"flex-col\" : \"flex-row\"\n            } ${pauseOnHover ? \"group-hover:[animation-play-state:paused]\" : \"\"}`}\n            style={{\n              gap: \"var(--gap)\",\n              animation: `${vertical ? \"marquee-vertical\" : \"marquee-horizontal\"} var(--duration) linear infinite ${\n                reverse ? \"reverse\" : \"\"\n              }`,\n            }}\n          >\n            {children}\n          </div>\n        ))}\n        <style>{`\n          @keyframes marquee-horizontal {\n            from { transform: translateX(0); }\n            to { transform: translateX(calc(-100% - var(--gap))); }\n          }\n          @keyframes marquee-vertical {\n            from { transform: translateY(0); }\n            to { transform: translateY(calc(-100% - var(--gap))); }\n          }\n        `}</style>\n      </div>\n    );\n  }\n);\n\nMarquee.displayName = \"Marquee\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

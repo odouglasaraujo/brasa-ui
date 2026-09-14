@@ -1,0 +1,14 @@
+{
+  "name": "magic-card",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/magic-card.tsx",
+      "content": "import {\n  forwardRef,\n  useCallback,\n  useRef,\n  useState,\n  type HTMLAttributes,\n  type MouseEvent,\n  type ReactNode,\n} from \"react\";\n\nexport interface MagicCardProps extends HTMLAttributes<HTMLDivElement> {\n  children: ReactNode;\n  gradientSize?: number;\n  gradientColor?: string;\n  gradientOpacity?: number;\n}\n\nexport const MagicCard = forwardRef<HTMLDivElement, MagicCardProps>(\n  (\n    {\n      className = \"\",\n      children,\n      gradientSize = 250,\n      gradientColor = \"#059669\",\n      gradientOpacity = 0.15,\n      ...props\n    },\n    ref\n  ) => {\n    const cardRef = useRef<HTMLDivElement>(null);\n    const [position, setPosition] = useState({ x: -gradientSize, y: -gradientSize });\n    const [opacity, setOpacity] = useState(0);\n\n    const handleMouseMove = useCallback(\n      (e: MouseEvent<HTMLDivElement>) => {\n        const rect = (cardRef.current || (e.target as HTMLElement)).getBoundingClientRect();\n        setPosition({\n          x: e.clientX - rect.left,\n          y: e.clientY - rect.top,\n        });\n      },\n      []\n    );\n\n    const handleMouseEnter = useCallback(() => {\n      setOpacity(1);\n    }, []);\n\n    const handleMouseLeave = useCallback(() => {\n      setOpacity(0);\n      setPosition({ x: -gradientSize, y: -gradientSize });\n    }, [gradientSize]);\n\n    return (\n      <div\n        ref={(node) => {\n          (cardRef as React.MutableRefObject<HTMLDivElement | null>).current = node;\n          if (typeof ref === \"function\") ref(node);\n          else if (ref) ref.current = node;\n        }}\n        className={`relative overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm ${className}`}\n        onMouseMove={handleMouseMove}\n        onMouseEnter={handleMouseEnter}\n        onMouseLeave={handleMouseLeave}\n        {...props}\n      >\n        <div\n          className=\"pointer-events-none absolute -inset-px rounded-[inherit] transition-opacity duration-300\"\n          style={{\n            background: `radial-gradient(${gradientSize}px circle at ${position.x}px ${position.y}px, ${gradientColor}, transparent 65%)`,\n            opacity: opacity * gradientOpacity,\n          }}\n        />\n        <div className=\"relative\">{children}</div>\n      </div>\n    );\n  }\n);\n\nMagicCard.displayName = \"MagicCard\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

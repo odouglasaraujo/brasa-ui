@@ -1,0 +1,14 @@
+{
+  "name": "skeleton",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/skeleton.tsx",
+      "content": "import { forwardRef, type HTMLAttributes } from \"react\";\n\nexport interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {\n  variant?: \"text\" | \"circular\" | \"rectangular\";\n  width?: string | number;\n  height?: string | number;\n}\n\nexport const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(\n  ({ className = \"\", variant = \"text\", width, height, style, ...props }, ref) => {\n    const variantClasses = {\n      text: \"rounded-md h-4 w-full\",\n      circular: \"rounded-full aspect-square\",\n      rectangular: \"rounded-xl\",\n    };\n\n    return (\n      <div\n        ref={ref}\n        aria-hidden=\"true\"\n        className={`bg-neutral-100 ${variantClasses[variant]} ${className}`}\n        style={{\n          width: typeof width === \"number\" ? `${width}px` : width,\n          height: typeof height === \"number\" ? `${height}px` : height,\n          animation: \"skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite\",\n          ...style,\n        }}\n        {...props}\n      >\n        <style>{`\n          @keyframes skeleton-pulse {\n            0%, 100% { opacity: 1; }\n            50% { opacity: 0.4; }\n          }\n        `}</style>\n      </div>\n    );\n  }\n);\n\nSkeleton.displayName = \"Skeleton\";\n\nexport interface SkeletonGroupProps extends HTMLAttributes<HTMLDivElement> {\n  lines?: number;\n  avatar?: boolean;\n}\n\nexport const SkeletonGroup = forwardRef<HTMLDivElement, SkeletonGroupProps>(\n  ({ className = \"\", lines = 3, avatar = false, ...props }, ref) => {\n    return (\n      <div ref={ref} className={`flex gap-4 ${className}`} {...props}>\n        {avatar && <Skeleton variant=\"circular\" width={40} height={40} className=\"shrink-0\" />}\n        <div className=\"flex flex-1 flex-col gap-2.5\">\n          <Skeleton variant=\"text\" className=\"w-3/5\" />\n          {Array.from({ length: lines - 1 }).map((_, i) => (\n            <Skeleton\n              key={i}\n              variant=\"text\"\n              className={i === lines - 2 ? \"w-2/5\" : \"w-full\"}\n            />\n          ))}\n        </div>\n      </div>\n    );\n  }\n);\n\nSkeletonGroup.displayName = \"SkeletonGroup\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

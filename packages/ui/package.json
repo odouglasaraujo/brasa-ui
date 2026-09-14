@@ -1,6 +1,6 @@
 {
   "name": "brasa.ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Brazilian UI components for the AI era — CPF, Pix, CEP, parcelamento, and more",
   "license": "MIT",
   "author": "Douglas Araujo <douglasp.araujo96@gmail.com>",

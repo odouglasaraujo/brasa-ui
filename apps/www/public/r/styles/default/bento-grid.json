@@ -1,0 +1,14 @@
+{
+  "name": "bento-grid",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/bento-grid.tsx",
+      "content": "import { forwardRef, type HTMLAttributes, type ReactNode } from \"react\";\n\nexport interface BentoGridProps extends HTMLAttributes<HTMLDivElement> {\n  children: ReactNode;\n  columns?: 2 | 3 | 4;\n}\n\nconst columnClasses = {\n  2: \"grid-cols-1 md:grid-cols-2\",\n  3: \"grid-cols-1 md:grid-cols-2 lg:grid-cols-3\",\n  4: \"grid-cols-1 md:grid-cols-2 lg:grid-cols-4\",\n} as const;\n\nexport const BentoGrid = forwardRef<HTMLDivElement, BentoGridProps>(\n  ({ className = \"\", columns = 3, children, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        className={`grid gap-4 ${columnClasses[columns]} ${className}`}\n        {...props}\n      >\n        {children}\n      </div>\n    );\n  }\n);\n\nBentoGrid.displayName = \"BentoGrid\";\n\nexport interface BentoCardProps extends HTMLAttributes<HTMLDivElement> {\n  title: string;\n  description?: string;\n  icon?: ReactNode;\n  span?: 1 | 2;\n  children?: ReactNode;\n}\n\nexport const BentoCard = forwardRef<HTMLDivElement, BentoCardProps>(\n  ({ className = \"\", title, description, icon, span = 1, children, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        className={`group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:border-neutral-300 ${\n          span === 2 ? \"md:col-span-2\" : \"\"\n        } ${className}`}\n        {...props}\n      >\n        {icon && (\n          <div className=\"mb-4 inline-flex rounded-xl border border-neutral-100 bg-neutral-50 p-2.5 text-neutral-600\">\n            {icon}\n          </div>\n        )}\n        <h3 className=\"text-lg font-semibold text-neutral-900\">{title}</h3>\n        {description && (\n          <p className=\"mt-1.5 text-sm leading-relaxed text-neutral-500\">\n            {description}\n          </p>\n        )}\n        {children && <div className=\"mt-4\">{children}</div>}\n      </div>\n    );\n  }\n);\n\nBentoCard.displayName = \"BentoCard\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

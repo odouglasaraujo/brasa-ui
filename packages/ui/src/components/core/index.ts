@@ -13,3 +13,16 @@ export { Dialog, DialogHeader, DialogContent, DialogFooter, type DialogProps } f
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent, type AccordionProps, type AccordionItemProps, type AccordionTriggerProps, type AccordionContentProps } from "./accordion";
 export { Dropdown, type DropdownProps, type DropdownItem } from "./dropdown";
 export { Tooltip, type TooltipProps } from "./tooltip";
+export { Marquee, type MarqueeProps } from "./marquee";
+export { NumberTicker, type NumberTickerProps } from "./number-ticker";
+export { AnimatedList, type AnimatedListProps } from "./animated-list";
+export { BentoGrid, BentoCard, type BentoGridProps, type BentoCardProps } from "./bento-grid";
+export { AvatarCircles, type AvatarCirclesProps, type AvatarCircle } from "./avatar-circles";
+export { BorderBeam, type BorderBeamProps } from "./border-beam";
+export { ShimmerButton, type ShimmerButtonProps } from "./shimmer-button";
+export { MagicCard, type MagicCardProps } from "./magic-card";
+export { TypingAnimation, type TypingAnimationProps } from "./typing-animation";
+export { DotPattern, type DotPatternProps } from "./dot-pattern";
+export { RetroGrid, type RetroGridProps } from "./retro-grid";
+export { Skeleton, SkeletonGroup, type SkeletonProps, type SkeletonGroupProps } from "./skeleton";
+export { Progress, StepProgress, type ProgressProps, type StepProgressProps } from "./progress";

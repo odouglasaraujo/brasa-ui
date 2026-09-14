@@ -184,6 +184,126 @@
     ]
   },
   {
+    "name": "marquee",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/marquee.tsx"
+    ]
+  },
+  {
+    "name": "number-ticker",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/number-ticker.tsx"
+    ]
+  },
+  {
+    "name": "animated-list",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/animated-list.tsx"
+    ]
+  },
+  {
+    "name": "bento-grid",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/bento-grid.tsx"
+    ]
+  },
+  {
+    "name": "avatar-circles",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/avatar-circles.tsx"
+    ]
+  },
+  {
+    "name": "border-beam",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/border-beam.tsx"
+    ]
+  },
+  {
+    "name": "shimmer-button",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/shimmer-button.tsx"
+    ]
+  },
+  {
+    "name": "magic-card",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/magic-card.tsx"
+    ]
+  },
+  {
+    "name": "typing-animation",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/typing-animation.tsx"
+    ]
+  },
+  {
+    "name": "dot-pattern",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/dot-pattern.tsx"
+    ]
+  },
+  {
+    "name": "retro-grid",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/retro-grid.tsx"
+    ]
+  },
+  {
+    "name": "skeleton",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/skeleton.tsx"
+    ]
+  },
+  {
+    "name": "progress",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/progress.tsx"
+    ]
+  },
+  {
+    "name": "pix-key-input",
+    "type": "brazil",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/brazil/pix-key-input.tsx"
+    ]
+  },
+  {
+    "name": "boleto-display",
+    "type": "payments",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/payments/boleto-display.tsx"
+    ]
+  },
+  {
     "name": "masks",
     "type": "utils",
     "registryDependencies": [],

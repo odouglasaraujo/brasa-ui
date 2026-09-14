@@ -1,0 +1,47 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "boleto-display",
+  "displayName": "Boleto Display",
+  "description": "Displays a Brazilian boleto bancário with barcode visualization, digitable line, and copy-to-clipboard functionality. UI-only — does not generate or validate boletos.",
+  "locale": "pt-BR",
+  "country": "BR",
+  "category": "payments/boleto",
+  "tags": ["boleto", "bancário", "barcode", "payment", "brazil"],
+  "props": {
+    "digitableLine": { "type": "string", "required": true, "description": "The 47 or 48 digit boleto number" },
+    "barcode": { "type": "string", "description": "Optional barcode image URL" },
+    "dueDate": { "type": "string", "description": "Formatted due date string (e.g., '15/10/2026')" },
+    "amount": { "type": "number", "description": "Payment amount in BRL" },
+    "beneficiary": { "type": "string", "description": "Name of the payment recipient" },
+    "payer": { "type": "string", "description": "Name of the payer" },
+    "description": { "type": "string", "description": "Payment description" },
+    "onCopyLine": { "type": "function", "description": "Callback when digitable line is copied. Receives digits string." }
+  },
+  "behavior": {
+    "autoFormat": "Formats 47-digit (título) and 48-digit (convênio) boletos",
+    "clipboard": "Copies raw digits on button click",
+    "barcodeVisualization": "Generates visual barcode representation from digits"
+  },
+  "states": {
+    "default": "Displays boleto information with barcode and copy button",
+    "copied": "Shows 'Copiado!' feedback for 2 seconds after copy"
+  },
+  "context": {
+    "whenToUse": "When displaying a boleto bancário for the user to copy and pay via their banking app",
+    "whenNotToUse": "When you need to generate boletos — use a PSP API (Itaú, Bradesco, etc.) for generation",
+    "culturalNote": "Boleto bancário is one of the most popular payment methods in Brazil, used by millions without credit cards. The digitable line (linha digitável) is what users paste into banking apps.",
+    "accessibility": "Copy button is keyboard accessible. Barcode is decorative (aria-hidden)."
+  },
+  "limits": {
+    "doesNot": [
+      "Generate boleto numbers or barcodes",
+      "Validate boleto authenticity",
+      "Communicate with banks or payment providers",
+      "Process payments"
+    ],
+    "requires": [
+      "Backend integration with a bank or PSP to generate the digitableLine",
+      "Valid boleto data from your payment provider"
+    ]
+  }
+}

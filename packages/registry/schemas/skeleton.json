@@ -1,0 +1,23 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "skeleton",
+  "displayName": "Skeleton",
+  "description": "Loading placeholder with pulse animation. Includes Skeleton (individual) and SkeletonGroup (pre-composed with optional avatar).",
+  "category": "core/feedback",
+  "tags": ["skeleton", "loading", "placeholder", "pulse", "shimmer"],
+  "props": {
+    "Skeleton": {
+      "variant": { "type": "string", "enum": ["text", "circular", "rectangular"], "default": "text" },
+      "width": { "type": "string | number" },
+      "height": { "type": "string | number" }
+    },
+    "SkeletonGroup": {
+      "lines": { "type": "number", "default": 3 },
+      "avatar": { "type": "boolean", "default": false, "description": "Show circular avatar placeholder" }
+    }
+  },
+  "context": {
+    "whenToUse": "While loading content, to prevent layout shift and show structure",
+    "whenNotToUse": "For simple spinners or when load time is under 200ms"
+  }
+}

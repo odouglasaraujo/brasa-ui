@@ -1,0 +1,14 @@
+{
+  "name": "animated-list",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/animated-list.tsx",
+      "content": "import {\n  forwardRef,\n  useEffect,\n  useState,\n  type HTMLAttributes,\n  type ReactElement,\n} from \"react\";\n\nexport interface AnimatedListProps extends HTMLAttributes<HTMLDivElement> {\n  children: ReactElement[];\n  delay?: number;\n}\n\nexport const AnimatedList = forwardRef<HTMLDivElement, AnimatedListProps>(\n  ({ className = \"\", children, delay = 1000, ...props }, ref) => {\n    const [visibleCount, setVisibleCount] = useState(0);\n\n    useEffect(() => {\n      const total = children.length;\n      if (visibleCount >= total) return;\n\n      const timeout = setTimeout(() => {\n        setVisibleCount((prev) => prev + 1);\n      }, delay);\n\n      return () => clearTimeout(timeout);\n    }, [visibleCount, children.length, delay]);\n\n    const visibleItems = children.slice(0, visibleCount);\n\n    return (\n      <div\n        ref={ref}\n        className={`flex flex-col gap-3 overflow-hidden ${className}`}\n        {...props}\n      >\n        {visibleItems.map((child, index) => (\n          <div\n            key={child.key ?? index}\n            className=\"animate-slide-in\"\n            style={{\n              animation: \"animated-list-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards\",\n            }}\n          >\n            {child}\n          </div>\n        ))}\n        <style>{`\n          @keyframes animated-list-in {\n            from {\n              opacity: 0;\n              transform: translateY(-12px) scale(0.96);\n            }\n            to {\n              opacity: 1;\n              transform: translateY(0) scale(1);\n            }\n          }\n        `}</style>\n      </div>\n    );\n  }\n);\n\nAnimatedList.displayName = \"AnimatedList\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

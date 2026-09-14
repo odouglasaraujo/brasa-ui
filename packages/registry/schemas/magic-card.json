@@ -1,0 +1,18 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "magic-card",
+  "displayName": "Magic Card",
+  "description": "Card with a spotlight gradient that follows the mouse cursor. Creates an elegant interactive hover effect.",
+  "category": "core/effects",
+  "tags": ["card", "spotlight", "hover", "mouse", "gradient", "interactive"],
+  "props": {
+    "children": { "type": "ReactNode", "required": true },
+    "gradientSize": { "type": "number", "default": 250, "description": "Radius of the spotlight in px" },
+    "gradientColor": { "type": "string", "default": "#059669", "description": "Color of the spotlight" },
+    "gradientOpacity": { "type": "number", "default": 0.15, "description": "Opacity of the spotlight (0-1)" }
+  },
+  "context": {
+    "whenToUse": "Feature cards, pricing cards, or any card that benefits from interactive hover effects",
+    "whenNotToUse": "For simple content cards without need for visual flair — use the standard Card component"
+  }
+}

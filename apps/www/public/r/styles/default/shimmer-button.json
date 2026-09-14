@@ -1,0 +1,14 @@
+{
+  "name": "shimmer-button",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/shimmer-button.tsx",
+      "content": "import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from \"react\";\n\nexport interface ShimmerButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {\n  children: ReactNode;\n  shimmerColor?: string;\n  shimmerSize?: string;\n  shimmerDuration?: string;\n  background?: string;\n  borderRadius?: string;\n}\n\nexport const ShimmerButton = forwardRef<HTMLButtonElement, ShimmerButtonProps>(\n  (\n    {\n      className = \"\",\n      children,\n      shimmerColor = \"#059669\",\n      shimmerSize = \"0.1em\",\n      shimmerDuration = \"2.5s\",\n      background = \"rgba(0, 0, 0, 0.9)\",\n      borderRadius = \"12px\",\n      ...props\n    },\n    ref\n  ) => {\n    return (\n      <button\n        ref={ref}\n        className={`group relative inline-flex h-11 items-center justify-center overflow-hidden whitespace-nowrap px-6 text-sm font-medium text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 ${className}`}\n        style={{ borderRadius, background }}\n        {...props}\n      >\n        <div\n          className=\"absolute inset-0 overflow-hidden\"\n          style={{ borderRadius }}\n        >\n          <div\n            className=\"absolute inset-[-100%]\"\n            style={{\n              background: `conic-gradient(from 0deg, transparent 0 340deg, ${shimmerColor} 360deg)`,\n              animation: `shimmer-spin ${shimmerDuration} linear infinite`,\n            }}\n          />\n        </div>\n        <div\n          className=\"absolute inset-px flex items-center justify-center\"\n          style={{ borderRadius, background }}\n        />\n        <span className=\"relative z-10 flex items-center gap-2\">{children}</span>\n        <style>{`\n          @keyframes shimmer-spin {\n            from { transform: rotate(0deg); }\n            to { transform: rotate(360deg); }\n          }\n        `}</style>\n      </button>\n    );\n  }\n);\n\nShimmerButton.displayName = \"ShimmerButton\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

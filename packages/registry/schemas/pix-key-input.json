@@ -1,0 +1,29 @@
+{
+  "$schema": "https://brasa.ui/schema/v1",
+  "name": "pix-key-input",
+  "displayName": "PIX Key Input",
+  "description": "Smart input for Brazilian Pix keys that auto-detects the key type (CPF, CNPJ, e-mail, telefone, chave aleatória) and applies the appropriate mask.",
+  "locale": "pt-BR",
+  "country": "BR",
+  "category": "brazil/payments",
+  "tags": ["pix", "key", "chave", "cpf", "cnpj", "email", "phone", "payment", "brazil"],
+  "props": {
+    "value": { "type": "string", "description": "Controlled input value" },
+    "onChange": { "type": "function", "description": "Callback with (value: string, keyType: PixKeyType)" },
+    "label": { "type": "string", "default": "Chave Pix" },
+    "error": { "type": "string", "description": "Error message to display" },
+    "showKeyType": { "type": "boolean", "default": true, "description": "Show detected key type badge" },
+    "placeholder": { "type": "string", "default": "CPF, e-mail, telefone ou chave aleatória" }
+  },
+  "behavior": {
+    "autoDetect": "Detects key type as user types: CPF (11 digits), CNPJ (14 digits), e-mail (@+.), phone (10-11 digits), random (UUID format)",
+    "autoMask": "Applies CPF/CNPJ/phone masks automatically when type is detected",
+    "badge": "Shows colored badge with detected type (CPF=blue, CNPJ=purple, E-mail=amber, Phone=green, Random=gray)",
+    "inputMode": "Standard text input to accommodate all key types"
+  },
+  "context": {
+    "whenToUse": "When collecting a Pix key from a user for transfers or payments",
+    "whenNotToUse": "When you already know the key type — use CPFInput, CNPJInput, or PhoneBR directly",
+    "culturalNote": "Pix keys can be CPF, CNPJ, e-mail, phone number, or a random UUID. The system was introduced by the Central Bank of Brazil in 2020 and is now the most used payment method in the country."
+  }
+}
