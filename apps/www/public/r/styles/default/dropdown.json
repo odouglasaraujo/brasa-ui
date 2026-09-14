@@ -1,0 +1,14 @@
+{
+  "name": "dropdown",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/dropdown.tsx",
+      "content": "\"use client\";\n\nimport { useState, useRef, useEffect, useCallback, type ReactNode } from \"react\";\n\nexport interface DropdownItem {\n  label: string;\n  value: string;\n  icon?: ReactNode;\n  disabled?: boolean;\n  danger?: boolean;\n}\n\nexport interface DropdownProps {\n  trigger: ReactNode;\n  items: DropdownItem[];\n  onSelect: (value: string) => void;\n  align?: \"left\" | \"right\";\n  className?: string;\n}\n\nexport function Dropdown({ trigger, items, onSelect, align = \"left\", className = \"\" }: DropdownProps) {\n  const [open, setOpen] = useState(false);\n  const ref = useRef<HTMLDivElement>(null);\n\n  const close = useCallback(() => setOpen(false), []);\n\n  useEffect(() => {\n    if (!open) return;\n    const handleClick = (e: MouseEvent) => {\n      if (ref.current && !ref.current.contains(e.target as Node)) close();\n    };\n    const handleEsc = (e: KeyboardEvent) => {\n      if (e.key === \"Escape\") close();\n    };\n    document.addEventListener(\"mousedown\", handleClick);\n    document.addEventListener(\"keydown\", handleEsc);\n    return () => {\n      document.removeEventListener(\"mousedown\", handleClick);\n      document.removeEventListener(\"keydown\", handleEsc);\n    };\n  }, [open, close]);\n\n  return (\n    <div ref={ref} className={`relative inline-block ${className}`}>\n      <div onClick={() => setOpen((p) => !p)} role=\"button\" tabIndex={0} aria-haspopup=\"true\" aria-expanded={open}>\n        {trigger}\n      </div>\n      {open && (\n        <div\n          className={`absolute z-40 mt-1.5 min-w-[180px] rounded-xl border border-neutral-200 bg-white py-1 shadow-lg shadow-neutral-200/50 ${\n            align === \"right\" ? \"right-0\" : \"left-0\"\n          }`}\n          role=\"menu\"\n        >\n          {items.map((item) => (\n            <button\n              key={item.value}\n              role=\"menuitem\"\n              type=\"button\"\n              disabled={item.disabled}\n              onClick={() => {\n                if (!item.disabled) {\n                  onSelect(item.value);\n                  close();\n                }\n              }}\n              className={`flex w-full items-center gap-2 px-3.5 py-2 text-left text-sm transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed ${\n                item.danger\n                  ? \"text-red-600 hover:bg-red-50\"\n                  : \"text-neutral-700 hover:bg-neutral-50\"\n              }`}\n            >\n              {item.icon && <span className=\"shrink-0\">{item.icon}</span>}\n              {item.label}\n            </button>\n          ))}\n        </div>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

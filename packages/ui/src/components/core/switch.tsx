@@ -50,12 +50,12 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
         aria-checked={isChecked}
         disabled={disabled}
         onClick={handleToggle}
-        className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+        className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-sm transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
           isChecked ? "bg-emerald-600" : "bg-neutral-200"
         } ${className}`}
       >
         <span
-          className={`pointer-events-none block h-5 w-5 rounded-full bg-white shadow-sm ring-0 transition-transform ${
+          className={`pointer-events-none block h-5 w-5 rounded-full bg-white shadow-sm ring-0 transition-transform duration-150 ${
             isChecked ? "translate-x-5" : "translate-x-0"
           }`}
         />
@@ -70,7 +70,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
         <div>
           <label
             htmlFor={switchId}
-            className="text-sm font-medium text-neutral-700 cursor-pointer"
+            className="text-[13px] font-semibold text-neutral-700 cursor-pointer"
           >
             {label}
           </label>

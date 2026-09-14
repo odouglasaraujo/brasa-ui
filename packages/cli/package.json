@@ -1,0 +1,26 @@
+{
+  "name": "@odougaraujo/brasa-ui",
+  "version": "0.1.1",
+  "description": "CLI to add brasa.ui components to your project",
+  "license": "MIT",
+  "author": "Douglas Araujo <douglasp.araujo96@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/odouglasaraujo/brasa-ui.git",
+    "directory": "packages/cli"
+  },
+  "keywords": ["brasa", "ui", "cli", "components", "brazil", "react"],
+  "type": "module",
+  "bin": {
+    "brasa-ui": "./dist/index.js"
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "devDependencies": {
+    "tsup": "^8",
+    "typescript": "^5"
+  }
+}

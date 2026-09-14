@@ -43,7 +43,7 @@ export function Dialog({ open, onClose, children, className = "" }: DialogProps)
       aria-modal="true"
     >
       <div
-        className={`relative w-full max-w-lg rounded-2xl border border-neutral-200 bg-white shadow-xl ${className}`}
+        className={`relative w-full max-w-lg rounded-2xl border border-neutral-200 bg-white shadow-xl shadow-neutral-200/30 ${className}`}
       >
         {children}
       </div>

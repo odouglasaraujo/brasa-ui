@@ -1,0 +1,14 @@
+{
+  "name": "badge",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/badge.tsx",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nconst variants = {\n  default: \"bg-neutral-100 text-neutral-700 border-neutral-200\",\n  success: \"bg-emerald-50 text-emerald-700 border-emerald-200\",\n  warning: \"bg-amber-50 text-amber-700 border-amber-200\",\n  error: \"bg-red-50 text-red-700 border-red-200\",\n  info: \"bg-blue-50 text-blue-700 border-blue-200\",\n  brasil: \"bg-gradient-to-r from-emerald-50 via-yellow-50 to-blue-50 text-emerald-700 border-emerald-200/60\",\n} as const;\n\nexport interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {\n  variant?: keyof typeof variants;\n}\n\nexport function Badge({ className = \"\", variant = \"default\", ...props }: BadgeProps) {\n  return (\n    <span\n      className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-semibold tracking-wide transition-colors ${variants[variant]} ${className}`}\n      {...props}\n    />\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

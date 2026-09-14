@@ -1,0 +1,14 @@
+{
+  "name": "masks",
+  "type": "registry:utils",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/utils/masks.ts",
+      "content": "export function maskCPF(value: string): string {\n  const digits = value.replace(/\\D/g, \"\").slice(0, 11);\n  return digits\n    .replace(/(\\d{3})(\\d)/, \"$1.$2\")\n    .replace(/(\\d{3})(\\d)/, \"$1.$2\")\n    .replace(/(\\d{3})(\\d{1,2})$/, \"$1-$2\");\n}\n\nexport function maskCNPJ(value: string): string {\n  const digits = value.replace(/\\D/g, \"\").slice(0, 14);\n  return digits\n    .replace(/(\\d{2})(\\d)/, \"$1.$2\")\n    .replace(/(\\d{3})(\\d)/, \"$1.$2\")\n    .replace(/(\\d{3})(\\d)/, \"$1/$2\")\n    .replace(/(\\d{4})(\\d{1,2})$/, \"$1-$2\");\n}\n\nexport function maskCEP(value: string): string {\n  const digits = value.replace(/\\D/g, \"\").slice(0, 8);\n  return digits.replace(/(\\d{5})(\\d{1,3})$/, \"$1-$2\");\n}\n\nexport function maskPhone(value: string): string {\n  const digits = value.replace(/\\D/g, \"\").slice(0, 11);\n  if (digits.length <= 10) {\n    return digits\n      .replace(/(\\d{2})(\\d)/, \"($1) $2\")\n      .replace(/(\\d{4})(\\d{1,4})$/, \"$1-$2\");\n  }\n  return digits\n    .replace(/(\\d{2})(\\d)/, \"($1) $2\")\n    .replace(/(\\d{5})(\\d{1,4})$/, \"$1-$2\");\n}\n\nexport function maskBRL(value: string): string {\n  const digits = value.replace(/\\D/g, \"\");\n  if (!digits) return \"\";\n  const cents = parseInt(digits, 10);\n  return (cents / 100).toLocaleString(\"pt-BR\", {\n    style: \"currency\",\n    currency: \"BRL\",\n  });\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

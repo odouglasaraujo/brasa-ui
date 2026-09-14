@@ -86,7 +86,7 @@ export const CEPInput = forwardRef<HTMLInputElement, CEPInputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-sm font-medium text-neutral-700"
+            className="block text-[13px] font-semibold text-neutral-700"
           >
             {label}
           </label>
@@ -102,27 +102,27 @@ export const CEPInput = forwardRef<HTMLInputElement, CEPInputProps>(
             value={currentValue}
             onChange={handleChange}
             maxLength={9}
-            className={`flex h-10 w-full rounded-xl border bg-white px-3 py-2 font-mono text-sm text-neutral-900 transition-colors placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+            className={`flex h-10 w-full rounded-xl border bg-white px-3.5 py-2 font-mono text-sm text-neutral-900 shadow-sm transition-all duration-150 placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
               error
-                ? "border-red-300 focus-visible:ring-red-400"
-                : "border-neutral-200 focus-visible:ring-neutral-400 hover:border-neutral-300"
+                ? "border-red-300 focus-visible:ring-red-400/40"
+                : "border-neutral-200 focus-visible:ring-emerald-500/40 hover:border-neutral-300"
             } ${className}`}
             {...props}
           />
           {loading && (
             <div className="absolute right-3 top-1/2 -translate-y-1/2">
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-neutral-200 border-t-neutral-600" />
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-neutral-200 border-t-emerald-600" />
             </div>
           )}
         </div>
         {error && (
-          <p className="text-xs text-red-600" role="alert">
+          <p className="text-xs font-medium text-red-600" role="alert">
             {error}
           </p>
         )}
         {address && (
-          <div className="rounded-lg border border-neutral-100 bg-neutral-50 px-3 py-2">
-            <p className="text-sm text-neutral-900">{address.logradouro}</p>
+          <div className="rounded-xl border border-emerald-100 bg-emerald-50/50 px-3.5 py-2.5">
+            <p className="text-sm font-medium text-neutral-900">{address.logradouro}</p>
             <p className="text-xs text-neutral-500">
               {address.bairro} — {address.localidade}, {address.uf}
             </p>

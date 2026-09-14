@@ -15,7 +15,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label
             htmlFor={textareaId}
-            className="block text-sm font-medium text-neutral-700"
+            className="block text-[13px] font-semibold text-neutral-700"
           >
             {label}
           </label>
@@ -25,15 +25,15 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={textareaId}
           aria-invalid={!!error}
           aria-describedby={error ? `${textareaId}-error` : hint ? `${textareaId}-hint` : undefined}
-          className={`flex min-h-[80px] w-full rounded-xl border bg-white px-3 py-2 text-sm text-neutral-900 transition-colors placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+          className={`flex min-h-[80px] w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-neutral-900 shadow-sm transition-all duration-150 placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
             error
-              ? "border-red-300 focus-visible:ring-red-400"
-              : "border-neutral-200 focus-visible:ring-neutral-400 hover:border-neutral-300"
+              ? "border-red-300 focus-visible:ring-red-400/40"
+              : "border-neutral-200 focus-visible:ring-emerald-500/40 hover:border-neutral-300"
           } ${className}`}
           {...props}
         />
         {error && (
-          <p id={`${textareaId}-error`} className="text-xs text-red-600" role="alert">
+          <p id={`${textareaId}-error`} className="text-xs font-medium text-red-600" role="alert">
             {error}
           </p>
         )}

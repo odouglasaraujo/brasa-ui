@@ -73,7 +73,7 @@ export function TabTrigger({ value, children, className = "", disabled }: TabTri
       aria-selected={isActive}
       disabled={disabled}
       onClick={() => setActiveTab(value)}
-      className={`flex-1 rounded-lg px-3 py-2 text-sm font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+      className={`flex-1 rounded-lg px-3 py-2 text-sm font-semibold transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed ${
         isActive
           ? "bg-white text-neutral-900 shadow-sm"
           : "text-neutral-500 hover:text-neutral-700"

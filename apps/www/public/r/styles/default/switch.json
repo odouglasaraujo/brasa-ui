@@ -1,0 +1,14 @@
+{
+  "name": "switch",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/switch.tsx",
+      "content": "\"use client\";\n\nimport { forwardRef, useCallback, useState } from \"react\";\n\nexport interface SwitchProps {\n  checked?: boolean;\n  defaultChecked?: boolean;\n  onChange?: (checked: boolean) => void;\n  disabled?: boolean;\n  label?: string;\n  description?: string;\n  id?: string;\n  className?: string;\n}\n\nexport const Switch = forwardRef<HTMLButtonElement, SwitchProps>(\n  (\n    {\n      checked: controlledChecked,\n      defaultChecked = false,\n      onChange,\n      disabled = false,\n      label,\n      description,\n      id,\n      className = \"\",\n    },\n    ref\n  ) => {\n    const [internalChecked, setInternalChecked] = useState(defaultChecked);\n    const isChecked = controlledChecked ?? internalChecked;\n\n    const handleToggle = useCallback(() => {\n      if (disabled) return;\n      const next = !isChecked;\n      if (controlledChecked === undefined) {\n        setInternalChecked(next);\n      }\n      onChange?.(next);\n    }, [isChecked, controlledChecked, onChange, disabled]);\n\n    const switchId = id || label?.toLowerCase().replace(/\\s+/g, \"-\");\n\n    const toggle = (\n      <button\n        ref={ref}\n        id={switchId}\n        type=\"button\"\n        role=\"switch\"\n        aria-checked={isChecked}\n        disabled={disabled}\n        onClick={handleToggle}\n        className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-sm transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${\n          isChecked ? \"bg-emerald-600\" : \"bg-neutral-200\"\n        } ${className}`}\n      >\n        <span\n          className={`pointer-events-none block h-5 w-5 rounded-full bg-white shadow-sm ring-0 transition-transform duration-150 ${\n            isChecked ? \"translate-x-5\" : \"translate-x-0\"\n          }`}\n        />\n      </button>\n    );\n\n    if (!label) return toggle;\n\n    return (\n      <div className=\"flex items-start gap-3\">\n        {toggle}\n        <div>\n          <label\n            htmlFor={switchId}\n            className=\"text-[13px] font-semibold text-neutral-700 cursor-pointer\"\n          >\n            {label}\n          </label>\n          {description && (\n            <p className=\"text-xs text-neutral-500\">{description}</p>\n          )}\n        </div>\n      </div>\n    );\n  }\n);\n\nSwitch.displayName = \"Switch\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

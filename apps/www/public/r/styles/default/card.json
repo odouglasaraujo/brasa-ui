@@ -1,0 +1,14 @@
+{
+  "name": "card",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/card.tsx",
+      "content": "import { forwardRef, type HTMLAttributes } from \"react\";\n\nexport interface CardProps extends HTMLAttributes<HTMLDivElement> {\n  variant?: \"default\" | \"bordered\" | \"elevated\";\n}\n\nexport const Card = forwardRef<HTMLDivElement, CardProps>(\n  ({ className = \"\", variant = \"default\", ...props }, ref) => {\n    const variantStyles = {\n      default: \"border border-neutral-200 bg-white shadow-sm\",\n      bordered: \"border-2 border-neutral-200 bg-white\",\n      elevated: \"border border-neutral-100 bg-white shadow-lg shadow-neutral-200/40\",\n    };\n\n    return (\n      <div\n        ref={ref}\n        className={`rounded-2xl ${variantStyles[variant]} ${className}`}\n        {...props}\n      />\n    );\n  }\n);\n\nCard.displayName = \"Card\";\n\nexport const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(\n  ({ className = \"\", ...props }, ref) => (\n    <div ref={ref} className={`border-b border-neutral-100 px-6 py-4 ${className}`} {...props} />\n  )\n);\nCardHeader.displayName = \"CardHeader\";\n\nexport const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(\n  ({ className = \"\", ...props }, ref) => (\n    <div ref={ref} className={`px-6 py-4 ${className}`} {...props} />\n  )\n);\nCardContent.displayName = \"CardContent\";\n\nexport const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(\n  ({ className = \"\", ...props }, ref) => (\n    <div ref={ref} className={`border-t border-neutral-100 px-6 py-4 ${className}`} {...props} />\n  )\n);\nCardFooter.displayName = \"CardFooter\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

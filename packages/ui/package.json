@@ -1,7 +1,7 @@
 {
   "name": "brasa.ui",
-  "version": "0.0.1",
-  "description": "Brazilian UI components for the AI era",
+  "version": "0.1.0",
+  "description": "Brazilian UI components for the AI era — CPF, Pix, CEP, parcelamento, and more",
   "license": "MIT",
   "author": "Douglas Araujo <douglasp.araujo96@gmail.com>",
   "repository": {
@@ -9,7 +9,7 @@
     "url": "https://github.com/odouglasaraujo/brasa-ui.git",
     "directory": "packages/ui"
   },
-  "homepage": "https://github.com/odouglasaraujo/brasa-ui",
+  "homepage": "https://brasa-ui.vercel.app",
   "bugs": {
     "url": "https://github.com/odouglasaraujo/brasa-ui/issues"
   },
@@ -28,20 +28,30 @@
     "typescript",
     "tailwindcss",
     "ai",
-    "ai-ready"
+    "ai-ready",
+    "qrcode",
+    "cnpj",
+    "phone-br"
   ],
   "type": "module",
   "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./utils": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch"

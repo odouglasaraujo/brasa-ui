@@ -1,0 +1,93 @@
+name: Publish to npm
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/ui/package.json"
+      - "packages/cli/package.json"
+
+jobs:
+  publish-ui:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: "https://registry.npmjs.org"
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build library
+        run: pnpm --filter brasa.ui build
+
+      - name: Check if UI version changed
+        id: ui-version
+        run: |
+          LOCAL=$(node -p "require('./packages/ui/package.json').version")
+          REMOTE=$(npm view brasa.ui version 2>/dev/null || echo "0.0.0")
+          if [ "$LOCAL" != "$REMOTE" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "UI version changed: $REMOTE -> $LOCAL"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "UI version unchanged: $LOCAL"
+          fi
+
+      - name: Publish brasa.ui
+        if: steps.ui-version.outputs.changed == 'true'
+        run: cd packages/ui && npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-cli:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: "https://registry.npmjs.org"
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build CLI
+        run: pnpm --filter @odougaraujo/brasa-ui build
+
+      - name: Check if CLI version changed
+        id: cli-version
+        run: |
+          LOCAL=$(node -p "require('./packages/cli/package.json').version")
+          REMOTE=$(npm view @odougaraujo/brasa-ui version 2>/dev/null || echo "0.0.0")
+          if [ "$LOCAL" != "$REMOTE" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "CLI version changed: $REMOTE -> $LOCAL"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "CLI version unchanged: $LOCAL"
+          fi
+
+      - name: Publish @odougaraujo/brasa-ui
+        if: steps.cli-version.outputs.changed == 'true'
+        run: cd packages/cli && npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

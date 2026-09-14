@@ -1,0 +1,14 @@
+{
+  "name": "dialog",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/dialog.tsx",
+      "content": "\"use client\";\n\nimport { useCallback, useEffect, useRef, type ReactNode } from \"react\";\n\nexport interface DialogProps {\n  open: boolean;\n  onClose: () => void;\n  children: ReactNode;\n  className?: string;\n}\n\nexport function Dialog({ open, onClose, children, className = \"\" }: DialogProps) {\n  const overlayRef = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    if (!open) return;\n    const handleEsc = (e: KeyboardEvent) => {\n      if (e.key === \"Escape\") onClose();\n    };\n    document.addEventListener(\"keydown\", handleEsc);\n    document.body.style.overflow = \"hidden\";\n    return () => {\n      document.removeEventListener(\"keydown\", handleEsc);\n      document.body.style.overflow = \"\";\n    };\n  }, [open, onClose]);\n\n  const handleOverlayClick = useCallback(\n    (e: React.MouseEvent) => {\n      if (e.target === overlayRef.current) onClose();\n    },\n    [onClose]\n  );\n\n  if (!open) return null;\n\n  return (\n    <div\n      ref={overlayRef}\n      onClick={handleOverlayClick}\n      className=\"fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm\"\n      role=\"dialog\"\n      aria-modal=\"true\"\n    >\n      <div\n        className={`relative w-full max-w-lg rounded-2xl border border-neutral-200 bg-white shadow-xl shadow-neutral-200/30 ${className}`}\n      >\n        {children}\n      </div>\n    </div>\n  );\n}\n\nexport function DialogHeader({ children, className = \"\" }: { children: ReactNode; className?: string }) {\n  return (\n    <div className={`border-b border-neutral-100 px-6 py-4 ${className}`}>\n      {children}\n    </div>\n  );\n}\n\nexport function DialogContent({ children, className = \"\" }: { children: ReactNode; className?: string }) {\n  return (\n    <div className={`px-6 py-4 ${className}`}>{children}</div>\n  );\n}\n\nexport function DialogFooter({ children, className = \"\" }: { children: ReactNode; className?: string }) {\n  return (\n    <div className={`flex items-center justify-end gap-2 border-t border-neutral-100 px-6 py-4 ${className}`}>\n      {children}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

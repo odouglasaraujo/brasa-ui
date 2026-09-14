@@ -31,3 +31,4 @@ export { InstallmentSelect, type InstallmentSelectProps, type InstallmentOption 
 export { maskCPF, maskCNPJ, maskCEP, maskPhone, maskBRL } from "./utils/masks";
 export { validateCPF, validateCNPJ, validateCEP, validatePhone } from "./utils/validators";
 export { formatBRL, formatCPF, formatCNPJ, formatCEP, formatInstallments } from "./utils/formatters";
+export { generateQR } from "./utils/qrcode";

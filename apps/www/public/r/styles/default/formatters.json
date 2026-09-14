@@ -1,0 +1,14 @@
+{
+  "name": "formatters",
+  "type": "registry:utils",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/utils/formatters.ts",
+      "content": "export function formatBRL(value: number): string {\n  return value.toLocaleString(\"pt-BR\", {\n    style: \"currency\",\n    currency: \"BRL\",\n  });\n}\n\nexport function formatCPF(digits: string): string {\n  const d = digits.replace(/\\D/g, \"\").slice(0, 11);\n  if (d.length !== 11) return d;\n  return `${d.slice(0, 3)}.${d.slice(3, 6)}.${d.slice(6, 9)}-${d.slice(9)}`;\n}\n\nexport function formatCNPJ(digits: string): string {\n  const d = digits.replace(/\\D/g, \"\").slice(0, 14);\n  if (d.length !== 14) return d;\n  return `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5, 8)}/${d.slice(8, 12)}-${d.slice(12)}`;\n}\n\nexport function formatCEP(digits: string): string {\n  const d = digits.replace(/\\D/g, \"\").slice(0, 8);\n  if (d.length !== 8) return d;\n  return `${d.slice(0, 5)}-${d.slice(5)}`;\n}\n\nexport function formatInstallments(\n  total: number,\n  n: number,\n  interestFree = true\n): string {\n  const value = total / n;\n  const formatted = formatBRL(value);\n  const suffix = interestFree ? \" sem juros\" : \"\";\n  return `${n}x de ${formatted}${suffix}`;\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

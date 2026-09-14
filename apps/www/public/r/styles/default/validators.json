@@ -1,0 +1,14 @@
+{
+  "name": "validators",
+  "type": "registry:utils",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/utils/validators.ts",
+      "content": "export function validateCPF(cpf: string): boolean {\n  const digits = cpf.replace(/\\D/g, \"\");\n  if (digits.length !== 11) return false;\n  if (/^(\\d)\\1{10}$/.test(digits)) return false;\n\n  let sum = 0;\n  for (let i = 0; i < 9; i++) sum += parseInt(digits[i]) * (10 - i);\n  let check = 11 - (sum % 11);\n  if (check >= 10) check = 0;\n  if (parseInt(digits[9]) !== check) return false;\n\n  sum = 0;\n  for (let i = 0; i < 10; i++) sum += parseInt(digits[i]) * (11 - i);\n  check = 11 - (sum % 11);\n  if (check >= 10) check = 0;\n  return parseInt(digits[10]) === check;\n}\n\nexport function validateCNPJ(cnpj: string): boolean {\n  const digits = cnpj.replace(/\\D/g, \"\");\n  if (digits.length !== 14) return false;\n  if (/^(\\d)\\1{13}$/.test(digits)) return false;\n\n  const weights1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];\n  const weights2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];\n\n  let sum = 0;\n  for (let i = 0; i < 12; i++) sum += parseInt(digits[i]) * weights1[i];\n  let check = sum % 11 < 2 ? 0 : 11 - (sum % 11);\n  if (parseInt(digits[12]) !== check) return false;\n\n  sum = 0;\n  for (let i = 0; i < 13; i++) sum += parseInt(digits[i]) * weights2[i];\n  check = sum % 11 < 2 ? 0 : 11 - (sum % 11);\n  return parseInt(digits[13]) === check;\n}\n\nexport function validateCEP(cep: string): boolean {\n  return /^\\d{8}$/.test(cep.replace(/\\D/g, \"\"));\n}\n\nexport function validatePhone(phone: string): boolean {\n  const digits = phone.replace(/\\D/g, \"\");\n  return digits.length === 10 || digits.length === 11;\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

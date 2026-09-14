@@ -1,0 +1,14 @@
+{
+  "name": "tabs",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/tabs.tsx",
+      "content": "\"use client\";\n\nimport { useState, useCallback, createContext, useContext, type ReactNode } from \"react\";\n\ninterface TabsContextValue {\n  activeTab: string;\n  setActiveTab: (id: string) => void;\n}\n\nconst TabsContext = createContext<TabsContextValue | null>(null);\n\nfunction useTabsContext() {\n  const ctx = useContext(TabsContext);\n  if (!ctx) throw new Error(\"Tab components must be used within <Tabs>\");\n  return ctx;\n}\n\nexport interface TabsProps {\n  defaultValue: string;\n  value?: string;\n  onChange?: (value: string) => void;\n  children: ReactNode;\n  className?: string;\n}\n\nexport function Tabs({ defaultValue, value, onChange, children, className = \"\" }: TabsProps) {\n  const [internalValue, setInternalValue] = useState(defaultValue);\n  const activeTab = value ?? internalValue;\n\n  const setActiveTab = useCallback(\n    (id: string) => {\n      if (value === undefined) setInternalValue(id);\n      onChange?.(id);\n    },\n    [value, onChange]\n  );\n\n  return (\n    <TabsContext.Provider value={{ activeTab, setActiveTab }}>\n      <div className={className}>{children}</div>\n    </TabsContext.Provider>\n  );\n}\n\nexport interface TabListProps {\n  children: ReactNode;\n  className?: string;\n}\n\nexport function TabList({ children, className = \"\" }: TabListProps) {\n  return (\n    <div role=\"tablist\" className={`flex gap-1 rounded-xl bg-neutral-100 p-1 ${className}`}>\n      {children}\n    </div>\n  );\n}\n\nexport interface TabTriggerProps {\n  value: string;\n  children: ReactNode;\n  className?: string;\n  disabled?: boolean;\n}\n\nexport function TabTrigger({ value, children, className = \"\", disabled }: TabTriggerProps) {\n  const { activeTab, setActiveTab } = useTabsContext();\n  const isActive = activeTab === value;\n\n  return (\n    <button\n      role=\"tab\"\n      type=\"button\"\n      aria-selected={isActive}\n      disabled={disabled}\n      onClick={() => setActiveTab(value)}\n      className={`flex-1 rounded-lg px-3 py-2 text-sm font-semibold transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed ${\n        isActive\n          ? \"bg-white text-neutral-900 shadow-sm\"\n          : \"text-neutral-500 hover:text-neutral-700\"\n      } ${className}`}\n    >\n      {children}\n    </button>\n  );\n}\n\nexport interface TabContentProps {\n  value: string;\n  children: ReactNode;\n  className?: string;\n}\n\nexport function TabContent({ value, children, className = \"\" }: TabContentProps) {\n  const { activeTab } = useTabsContext();\n  if (activeTab !== value) return null;\n\n  return (\n    <div role=\"tabpanel\" className={`mt-3 ${className}`}>\n      {children}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

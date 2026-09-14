@@ -15,7 +15,7 @@ export function Footer() {
 
         <div className="flex items-center gap-6 text-sm text-neutral-400">
           <a href="/componentes" className="transition-colors hover:text-neutral-600">Componentes</a>
-          <a href="#ai-ready" className="transition-colors hover:text-neutral-600">AI-Ready</a>
+          <a href="/showcase" className="transition-colors hover:text-neutral-600">Showcase</a>
           <a href="https://github.com/odouglasaraujo/brasa-ui" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-neutral-600">GitHub</a>
         </div>
 

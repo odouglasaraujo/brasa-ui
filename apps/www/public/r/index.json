@@ -1,0 +1,218 @@
+[
+  {
+    "name": "cpf-input",
+    "type": "brazil",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/brazil/cpf-input.tsx"
+    ]
+  },
+  {
+    "name": "cnpj-input",
+    "type": "brazil",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/brazil/cnpj-input.tsx"
+    ]
+  },
+  {
+    "name": "cep-input",
+    "type": "brazil",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/brazil/cep-input.tsx"
+    ]
+  },
+  {
+    "name": "currency-brl",
+    "type": "brazil",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/brazil/currency-brl.tsx"
+    ]
+  },
+  {
+    "name": "phone-br",
+    "type": "brazil",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/brazil/phone-br.tsx"
+    ]
+  },
+  {
+    "name": "state-select",
+    "type": "brazil",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/brazil/state-select.tsx"
+    ]
+  },
+  {
+    "name": "pix-payment",
+    "type": "payments",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/payments/pix-payment.tsx"
+    ]
+  },
+  {
+    "name": "installment-select",
+    "type": "payments",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/payments/installment-select.tsx"
+    ]
+  },
+  {
+    "name": "button",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/button.tsx"
+    ]
+  },
+  {
+    "name": "input",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/input.tsx"
+    ]
+  },
+  {
+    "name": "select",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/select.tsx"
+    ]
+  },
+  {
+    "name": "card",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/card.tsx"
+    ]
+  },
+  {
+    "name": "badge",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/badge.tsx"
+    ]
+  },
+  {
+    "name": "alert",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/alert.tsx"
+    ]
+  },
+  {
+    "name": "dialog",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/dialog.tsx"
+    ]
+  },
+  {
+    "name": "tabs",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/tabs.tsx"
+    ]
+  },
+  {
+    "name": "accordion",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/accordion.tsx"
+    ]
+  },
+  {
+    "name": "dropdown",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/dropdown.tsx"
+    ]
+  },
+  {
+    "name": "tooltip",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/tooltip.tsx"
+    ]
+  },
+  {
+    "name": "avatar",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/avatar.tsx"
+    ]
+  },
+  {
+    "name": "switch",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/switch.tsx"
+    ]
+  },
+  {
+    "name": "separator",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/separator.tsx"
+    ]
+  },
+  {
+    "name": "textarea",
+    "type": "core",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/components/core/textarea.tsx"
+    ]
+  },
+  {
+    "name": "masks",
+    "type": "utils",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/utils/masks.ts"
+    ]
+  },
+  {
+    "name": "validators",
+    "type": "utils",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/utils/validators.ts"
+    ]
+  },
+  {
+    "name": "formatters",
+    "type": "utils",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/utils/formatters.ts"
+    ]
+  },
+  {
+    "name": "qrcode",
+    "type": "utils",
+    "registryDependencies": [],
+    "files": [
+      "lib/brasa/utils/qrcode.ts"
+    ]
+  }
+]

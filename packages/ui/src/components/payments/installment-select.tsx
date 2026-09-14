@@ -92,7 +92,7 @@ export function InstallmentSelect({
   return (
     <div className={`space-y-2 ${className}`}>
       {label && (
-        <label className="block text-sm font-medium text-neutral-700">
+        <label className="block text-[13px] font-semibold text-neutral-700">
           {label}
         </label>
       )}
@@ -106,14 +106,14 @@ export function InstallmentSelect({
               role="radio"
               aria-checked={isSelected}
               onClick={() => handleSelect(opt)}
-              className={`flex w-full items-center gap-3 rounded-xl border-2 px-4 py-3 text-left transition-all ${
+              className={`flex w-full items-center gap-3 rounded-xl border-2 px-4 py-3 text-left shadow-sm transition-all duration-150 active:scale-[0.99] ${
                 isSelected
-                  ? "border-emerald-500 bg-emerald-50/50"
-                  : "border-neutral-100 bg-white hover:border-neutral-200"
+                  ? "border-emerald-500 bg-emerald-50/50 shadow-emerald-100/50"
+                  : "border-neutral-100 bg-white hover:border-neutral-200 hover:shadow-md"
               }`}
             >
               <div
-                className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 ${
+                className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
                   isSelected
                     ? "border-emerald-500 bg-emerald-500"
                     : "border-neutral-300"
@@ -128,14 +128,14 @@ export function InstallmentSelect({
                   {opt.installments}x de R$ {formatBRL(opt.value)}
                 </span>
                 <span
-                  className={`rounded-md px-2 py-0.5 text-[10px] font-semibold ${
+                  className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wide ${
                     opt.interestFree
                       ? "bg-emerald-100 text-emerald-700"
                       : "bg-neutral-100 text-neutral-500"
                   }`}
                 >
                   {opt.installments === 1
-                    ? "à vista"
+                    ? "a vista"
                     : opt.interestFree
                       ? "sem juros"
                       : `total R$ ${formatBRL(opt.total)}`}

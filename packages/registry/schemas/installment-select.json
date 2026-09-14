@@ -22,6 +22,17 @@
     "minimumValue": "Stops generating options when installment value drops below minInstallmentValue",
     "display": "Shows 'sem juros' badge for interest-free, 'à vista' for 1x, total with interest for others"
   },
+  "limits": {
+    "doesNot": [
+      "Process credit card payments",
+      "Communicate with payment gateways",
+      "Validate card numbers or perform anti-fraud checks"
+    ],
+    "requires": [
+      "Backend integration with a payment gateway for actual card processing",
+      "Your gateway's installment configuration to determine real interest rates"
+    ]
+  },
   "states": [
     { "name": "selected", "description": "One installment option is selected (green border + radio)" },
     { "name": "unselected", "description": "Default state for non-selected options" }

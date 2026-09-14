@@ -1,0 +1,14 @@
+{
+  "name": "separator",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/separator.tsx",
+      "content": "import { forwardRef, type HTMLAttributes } from \"react\";\n\nexport interface SeparatorProps extends HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\";\n  label?: string;\n}\n\nexport const Separator = forwardRef<HTMLDivElement, SeparatorProps>(\n  ({ orientation = \"horizontal\", label, className = \"\", ...props }, ref) => {\n    if (label) {\n      return (\n        <div\n          ref={ref}\n          role=\"separator\"\n          className={`flex items-center gap-3 ${className}`}\n          {...props}\n        >\n          <div className=\"h-px flex-1 bg-neutral-200\" />\n          <span className=\"text-xs font-medium text-neutral-400\">{label}</span>\n          <div className=\"h-px flex-1 bg-neutral-200\" />\n        </div>\n      );\n    }\n\n    return (\n      <div\n        ref={ref}\n        role=\"separator\"\n        className={`${\n          orientation === \"horizontal\"\n            ? \"h-px w-full bg-neutral-200\"\n            : \"h-full w-px bg-neutral-200\"\n        } ${className}`}\n        {...props}\n      />\n    );\n  }\n);\n\nSeparator.displayName = \"Separator\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

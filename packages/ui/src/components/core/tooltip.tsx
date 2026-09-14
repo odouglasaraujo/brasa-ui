@@ -36,7 +36,7 @@ export function Tooltip({ content, children, position = "top", delay = 200, clas
       {visible && (
         <div
           role="tooltip"
-          className={`absolute z-50 whitespace-nowrap rounded-lg bg-neutral-900 px-2.5 py-1.5 text-xs font-medium text-white shadow-lg pointer-events-none ${positionClasses[position]}`}
+          className={`absolute z-50 whitespace-nowrap rounded-lg bg-neutral-900 px-2.5 py-1.5 text-[11px] font-semibold tracking-wide text-white shadow-lg pointer-events-none ${positionClasses[position]}`}
         >
           {content}
         </div>

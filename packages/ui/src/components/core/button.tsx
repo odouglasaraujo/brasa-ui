@@ -1,11 +1,11 @@
 import { forwardRef, type ButtonHTMLAttributes } from "react";
 
 const variants = {
-  default: "bg-neutral-900 text-white hover:bg-neutral-800 active:bg-neutral-950",
-  primary: "bg-emerald-600 text-white hover:bg-emerald-700 active:bg-emerald-800",
-  outline: "border border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-50 active:bg-neutral-100",
+  default: "bg-neutral-900 text-white shadow-sm hover:bg-neutral-800 active:bg-neutral-950",
+  primary: "bg-emerald-600 text-white shadow-sm shadow-emerald-200/50 hover:bg-emerald-700 active:bg-emerald-800",
+  outline: "border border-neutral-200 bg-white text-neutral-900 shadow-sm hover:bg-neutral-50 hover:border-neutral-300 active:bg-neutral-100",
   ghost: "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-200",
-  destructive: "bg-red-600 text-white hover:bg-red-700 active:bg-red-800",
+  destructive: "bg-red-600 text-white shadow-sm hover:bg-red-700 active:bg-red-800",
   link: "text-neutral-900 underline-offset-4 hover:underline",
 } as const;
 
@@ -26,7 +26,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         disabled={disabled}
-        className={`inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${variants[variant]} ${sizes[size]} ${className}`}
+        className={`inline-flex items-center justify-center font-medium transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] ${variants[variant]} ${sizes[size]} ${className}`}
         {...props}
       />
     );

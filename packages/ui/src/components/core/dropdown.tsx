@@ -47,7 +47,7 @@ export function Dropdown({ trigger, items, onSelect, align = "left", className =
       </div>
       {open && (
         <div
-          className={`absolute z-40 mt-1 min-w-[180px] rounded-xl border border-neutral-200 bg-white py-1 shadow-lg ${
+          className={`absolute z-40 mt-1.5 min-w-[180px] rounded-xl border border-neutral-200 bg-white py-1 shadow-lg shadow-neutral-200/50 ${
             align === "right" ? "right-0" : "left-0"
           }`}
           role="menu"
@@ -64,7 +64,7 @@ export function Dropdown({ trigger, items, onSelect, align = "left", className =
                   close();
                 }
               }}
-              className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+              className={`flex w-full items-center gap-2 px-3.5 py-2 text-left text-sm transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed ${
                 item.danger
                   ? "text-red-600 hover:bg-red-50"
                   : "text-neutral-700 hover:bg-neutral-50"

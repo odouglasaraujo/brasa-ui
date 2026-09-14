@@ -1,15 +1,14 @@
 name: CI
 
 on:
-  push:
-    branches: [main]
   pull_request:
+    branches: [main]
+  push:
     branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -22,11 +21,16 @@ jobs:
           node-version: 22
           cache: pnpm
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
 
       - name: Build library
         run: pnpm --filter brasa.ui build
+
+      - name: Build CLI
+        run: pnpm --filter @odougaraujo/brasa-ui build
+
+      - name: Build registry
+        run: node scripts/build-registry.mjs
 
       - name: Build site
         run: pnpm --filter @brasa-ui/www build

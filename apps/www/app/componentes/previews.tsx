@@ -183,7 +183,7 @@ export const PREVIEWS: Record<string, React.ReactNode> = {
     <div className="w-full max-w-[280px]">
       <PixPayment
         pixCode="00020126580014br.gov.bcb.pix0136demo"
-        amount={14990}
+        amount={149.90}
         status="qr_generated"
       />
     </div>

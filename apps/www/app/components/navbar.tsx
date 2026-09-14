@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 const links = [
   { label: "Componentes", href: "/componentes" },
   { label: "Showcase", href: "/showcase" },
-  { label: "AI-Ready", href: "#ai-ready" },
+  { label: "AI-Ready", href: "/#ai-ready" },
 ];
 
 export function Navbar() {

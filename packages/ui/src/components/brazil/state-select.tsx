@@ -46,21 +46,21 @@ export const StateSelect = forwardRef<HTMLSelectElement, StateSelectProps>(
       switch (format) {
         case "code": return state.value;
         case "name": return state.label;
-        default: return `${state.value} - ${state.label}`;
+        default: return `${state.value} — ${state.label}`;
       }
     };
 
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label className="text-sm font-medium text-neutral-700">{label}</label>
+          <label className="text-[13px] font-semibold text-neutral-700">{label}</label>
         )}
         <select
           ref={ref}
-          className={`h-10 rounded-xl border bg-white px-3 text-sm text-neutral-900 outline-none transition-all focus:ring-2 ${
+          className={`h-10 appearance-none rounded-xl border bg-white px-3.5 pr-8 text-sm text-neutral-900 shadow-sm outline-none transition-all duration-150 focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
             error
-              ? "border-red-300 focus:border-red-500 focus:ring-red-500/20"
-              : "border-neutral-200 focus:border-neutral-400 focus:ring-neutral-400/20"
+              ? "border-red-300 focus-visible:ring-red-400/40"
+              : "border-neutral-200 focus-visible:ring-emerald-500/40 hover:border-neutral-300"
           } ${className}`}
           aria-invalid={!!error}
           {...props}
@@ -72,8 +72,8 @@ export const StateSelect = forwardRef<HTMLSelectElement, StateSelectProps>(
             </option>
           ))}
         </select>
-        {error && <span className="text-xs text-red-500">{error}</span>}
-        {!error && hint && <span className="text-xs text-neutral-400">{hint}</span>}
+        {error && <span className="text-xs font-medium text-red-600">{error}</span>}
+        {!error && hint && <span className="text-xs text-neutral-500">{hint}</span>}
       </div>
     );
   }

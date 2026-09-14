@@ -8,11 +8,12 @@ dist/
 *.tsbuildinfo
 out/
 
-# Environment
+# Environment & Secrets
 .env
-.env.local
-.env.production.local
-.env.development.local
+.env.*
+.npmrc
+*.pem
+*.key
 
 # OS
 .DS_Store

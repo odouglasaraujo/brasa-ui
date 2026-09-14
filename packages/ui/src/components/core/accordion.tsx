@@ -44,7 +44,7 @@ export function Accordion({ type = "single", defaultOpen = [], children, classNa
 
   return (
     <AccordionContext.Provider value={{ openItems, toggle, type }}>
-      <div className={`divide-y divide-neutral-200 rounded-xl border border-neutral-200 ${className}`}>
+      <div className={`divide-y divide-neutral-200 rounded-xl border border-neutral-200 shadow-sm ${className}`}>
         {children}
       </div>
     </AccordionContext.Provider>
@@ -80,7 +80,7 @@ export function AccordionTrigger({ value, children, className = "" }: AccordionT
       type="button"
       aria-expanded={isOpen}
       onClick={() => toggle(value)}
-      className={`flex w-full items-center justify-between px-4 py-3 text-left text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-50 ${className}`}
+      className={`flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold text-neutral-900 transition-all duration-150 hover:bg-neutral-50 ${className}`}
     >
       {children}
       <svg

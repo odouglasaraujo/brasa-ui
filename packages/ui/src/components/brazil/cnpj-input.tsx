@@ -39,7 +39,7 @@ export const CNPJInput = forwardRef<HTMLInputElement, CNPJInputProps>(
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label className="text-sm font-medium text-neutral-700">{label}</label>
+          <label className="text-[13px] font-semibold text-neutral-700">{label}</label>
         )}
         <input
           ref={ref}
@@ -50,21 +50,21 @@ export const CNPJInput = forwardRef<HTMLInputElement, CNPJInputProps>(
           onChange={handleChange}
           onBlur={() => setTouched(true)}
           maxLength={18}
-          className={`h-10 rounded-xl border bg-white px-3 text-sm text-neutral-900 outline-none transition-all placeholder:text-neutral-400 focus:ring-2 ${
+          className={`h-10 rounded-xl border bg-white px-3.5 font-mono text-sm text-neutral-900 shadow-sm outline-none transition-all duration-150 placeholder:text-neutral-400 focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
             errorMessage
-              ? "border-red-300 focus:border-red-500 focus:ring-red-500/20"
+              ? "border-red-300 focus-visible:ring-red-400/40"
               : touched && isComplete && isValid
-              ? "border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500/20"
-              : "border-neutral-200 focus:border-neutral-400 focus:ring-neutral-400/20"
+              ? "border-emerald-300 focus-visible:ring-emerald-500/40"
+              : "border-neutral-200 focus-visible:ring-emerald-500/40 hover:border-neutral-300"
           } ${className}`}
           aria-invalid={!!errorMessage}
           {...props}
         />
         {errorMessage && (
-          <span className="text-xs text-red-500">{errorMessage}</span>
+          <span className="text-xs font-medium text-red-600">{errorMessage}</span>
         )}
         {!errorMessage && hint && (
-          <span className="text-xs text-neutral-400">{hint}</span>
+          <span className="text-xs text-neutral-500">{hint}</span>
         )}
       </div>
     );

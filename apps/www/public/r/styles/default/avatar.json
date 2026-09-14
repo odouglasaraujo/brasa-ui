@@ -1,0 +1,14 @@
+{
+  "name": "avatar",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/avatar.tsx",
+      "content": "import { forwardRef, useState, type ImgHTMLAttributes } from \"react\";\n\nconst sizes = {\n  sm: \"h-8 w-8 text-xs\",\n  md: \"h-10 w-10 text-sm\",\n  lg: \"h-14 w-14 text-lg\",\n  xl: \"h-20 w-20 text-xl\",\n} as const;\n\nexport interface AvatarProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, \"size\"> {\n  size?: keyof typeof sizes;\n  fallback?: string;\n  className?: string;\n}\n\nfunction getInitials(name: string): string {\n  return name\n    .split(\" \")\n    .map((w) => w[0])\n    .filter(Boolean)\n    .slice(0, 2)\n    .join(\"\")\n    .toUpperCase();\n}\n\nexport const Avatar = forwardRef<HTMLDivElement, AvatarProps>(\n  ({ size = \"md\", fallback, src, alt = \"\", className = \"\", ...props }, ref) => {\n    const [error, setError] = useState(false);\n    const showImage = src && !error;\n    const initials = fallback ? getInitials(fallback) : alt ? getInitials(alt) : \"?\";\n\n    return (\n      <div\n        ref={ref}\n        className={`relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-neutral-100 font-medium text-neutral-600 ${sizes[size]} ${className}`}\n      >\n        {showImage ? (\n          <img\n            src={src}\n            alt={alt}\n            onError={() => setError(true)}\n            className=\"h-full w-full object-cover\"\n            {...props}\n          />\n        ) : (\n          <span>{initials}</span>\n        )}\n      </div>\n    );\n  }\n);\n\nAvatar.displayName = \"Avatar\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

@@ -1,0 +1,14 @@
+{
+  "name": "input",
+  "type": "registry:core",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/brasa/components/core/input.tsx",
+      "content": "import { forwardRef, type InputHTMLAttributes } from \"react\";\n\nexport interface InputProps extends InputHTMLAttributes<HTMLInputElement> {\n  label?: string;\n  error?: string;\n  hint?: string;\n}\n\nexport const Input = forwardRef<HTMLInputElement, InputProps>(\n  ({ className = \"\", label, error, hint, id, ...props }, ref) => {\n    const inputId = id || label?.toLowerCase().replace(/\\s+/g, \"-\");\n\n    return (\n      <div className=\"space-y-1.5\">\n        {label && (\n          <label\n            htmlFor={inputId}\n            className=\"block text-[13px] font-semibold text-neutral-700\"\n          >\n            {label}\n          </label>\n        )}\n        <input\n          ref={ref}\n          id={inputId}\n          aria-invalid={!!error}\n          aria-describedby={error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined}\n          className={`flex h-10 w-full rounded-xl border bg-white px-3.5 py-2 text-sm text-neutral-900 shadow-sm transition-all duration-150 placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${\n            error\n              ? \"border-red-300 focus-visible:ring-red-400/40\"\n              : \"border-neutral-200 focus-visible:ring-emerald-500/40 hover:border-neutral-300\"\n          } ${className}`}\n          {...props}\n        />\n        {error && (\n          <p id={`${inputId}-error`} className=\"text-xs font-medium text-red-600\" role=\"alert\">\n            {error}\n          </p>\n        )}\n        {hint && !error && (\n          <p id={`${inputId}-hint`} className=\"text-xs text-neutral-500\">\n            {hint}\n          </p>\n        )}\n      </div>\n    );\n  }\n);\n\nInput.displayName = \"Input\";\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {},
+  "cssVars": {}
+}

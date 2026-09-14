@@ -7,9 +7,9 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ className = "", variant = "default", ...props }, ref) => {
     const variantStyles = {
-      default: "border border-neutral-200 bg-white",
+      default: "border border-neutral-200 bg-white shadow-sm",
       bordered: "border-2 border-neutral-200 bg-white",
-      elevated: "border border-neutral-100 bg-white shadow-lg shadow-neutral-200/50",
+      elevated: "border border-neutral-100 bg-white shadow-lg shadow-neutral-200/40",
     };
 
     return (

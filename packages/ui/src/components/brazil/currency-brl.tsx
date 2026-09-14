@@ -65,17 +65,17 @@ export const CurrencyBRL = forwardRef<HTMLInputElement, CurrencyBRLProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-sm font-medium text-neutral-700"
+            className="block text-[13px] font-semibold text-neutral-700"
           >
             {label}
           </label>
         )}
-        <div className={`flex items-center rounded-xl border bg-white transition-colors focus-within:ring-2 focus-within:ring-offset-2 ${
+        <div className={`flex items-center rounded-xl border bg-white shadow-sm transition-all duration-150 focus-within:ring-2 focus-within:ring-offset-2 ${
           error
-            ? "border-red-300 focus-within:ring-red-400"
-            : "border-neutral-200 focus-within:ring-neutral-400 hover:border-neutral-300"
+            ? "border-red-300 focus-within:ring-red-400/40"
+            : "border-neutral-200 focus-within:ring-emerald-500/40 hover:border-neutral-300"
         }`}>
-          <span className="border-r border-neutral-200 bg-neutral-50 px-3 py-2 text-sm font-medium text-neutral-500 rounded-l-xl">
+          <span className="border-r border-neutral-200 bg-neutral-50 px-3.5 py-2 text-sm font-semibold text-neutral-500 rounded-l-xl">
             R$
           </span>
           <input
@@ -87,17 +87,17 @@ export const CurrencyBRL = forwardRef<HTMLInputElement, CurrencyBRLProps>(
             aria-invalid={!!error}
             value={displayValue}
             onChange={handleChange}
-            className={`flex-1 bg-transparent px-3 py-2 font-mono text-sm text-neutral-900 placeholder:text-neutral-400 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+            className={`flex-1 bg-transparent px-3.5 py-2 font-mono text-sm text-neutral-900 placeholder:text-neutral-400 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
             {...props}
           />
         </div>
         {error && (
-          <p className="text-xs text-red-600" role="alert">
+          <p className="text-xs font-medium text-red-600" role="alert">
             {error}
           </p>
         )}
         {showInstallments && installmentValue && (
-          <p className="text-xs text-neutral-500">
+          <p className="text-xs font-medium text-neutral-500">
             ou {maxInstallments}x de R$ {installmentValue} sem juros
           </p>
         )}
