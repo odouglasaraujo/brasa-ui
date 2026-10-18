@@ -1,6 +1,7 @@
 "use client";
 
-import { forwardRef, useCallback, useState, type ChangeEvent } from "react";
+import { controlStyles, controlBorder, controlError, labelStyles } from "../../utils/styles";
+import { forwardRef, useId, useCallback, useState, type ChangeEvent } from "react";
 import { maskCEP } from "../../utils/masks";
 import { validateCEP } from "../../utils/validators";
 
@@ -79,36 +80,38 @@ export const CEPInput = forwardRef<HTMLInputElement, CEPInputProps>(
       [controlledValue, onChange, onAddress, autoFetch]
     );
 
-    const inputId = id || "cep-input";
+    const generatedId = useId();
+    const inputId = id || generatedId;
 
     return (
       <div className="space-y-1.5">
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-[13px] font-semibold text-neutral-700"
+            className={labelStyles}
           >
             {label}
           </label>
         )}
         <div className="relative">
           <input
-            ref={ref}
+            {...props}
+          ref={ref}
             id={inputId}
             type="text"
             inputMode="numeric"
             placeholder="00000-000"
             aria-invalid={!!error}
+            aria-describedby={[props["aria-describedby"], error ? `${inputId}-error` : null].filter(Boolean).join(" ") || undefined}
             value={currentValue}
             onChange={handleChange}
             maxLength={9}
-            className={`flex h-10 w-full rounded-xl border bg-white px-3.5 py-2 font-mono text-sm text-neutral-900 shadow-sm transition-all duration-150 placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+            className={`${controlStyles} font-mono ${
               error
-                ? "border-red-300 focus-visible:ring-red-400/40"
-                : "border-neutral-200 focus-visible:ring-emerald-500/40 hover:border-neutral-300"
+                ? controlError
+                : controlBorder
             } ${className}`}
-            {...props}
-          />
+            />
           {loading && (
             <div className="absolute right-3 top-1/2 -translate-y-1/2">
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-neutral-200 border-t-emerald-600" />
@@ -116,7 +119,7 @@ export const CEPInput = forwardRef<HTMLInputElement, CEPInputProps>(
           )}
         </div>
         {error && (
-          <p className="text-xs font-medium text-red-600" role="alert">
+          <p id={`${inputId}-error`} className="text-xs font-medium text-red-600" role="alert">
             {error}
           </p>
         )}

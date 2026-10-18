@@ -128,7 +128,7 @@ export default function Checkout() {
         </h2>
 
         <p className="text-[15px] leading-relaxed text-neutral-700">
-          Alguns componentes brasileiros usam cores especificas. Adicione ao seu CSS:
+          Inclua o pacote na busca de classes do Tailwind. O tema é opcional e seus tokens podem ser sobrescritos:
         </p>
 
         <div className="mt-4 rounded-lg border border-neutral-200 bg-neutral-950 p-4">
@@ -137,6 +137,14 @@ export default function Checkout() {
           </div>
           <pre className="text-sm font-mono text-neutral-100 overflow-x-auto whitespace-pre">
             <code>{`@import "tailwindcss";
+@import "brasa.ui/theme.css";
+/* Ajuste o caminho relativo à localização deste CSS. */
+@source "../node_modules/brasa.ui/dist";
+
+:root {
+  --brasa-primary: #285b43;
+  --brasa-radius-control: 0.625rem;
+}
 
 @theme {
   --color-brasil-green: #059669;

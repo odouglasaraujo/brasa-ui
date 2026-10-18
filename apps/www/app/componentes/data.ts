@@ -553,17 +553,25 @@ export const COMPONENTS: ComponentDoc[] = [
     tags: ["bento", "grid", "layout", "features", "landing"],
     importPath: "brasa.ui",
     propsTable: [
-      { name: "columns", type: "2 | 3 | 4", default: "3", description: "Numero de colunas" },
-      { name: "title", type: "string", default: "-", description: "Titulo do card (BentoCard)" },
+      { name: "name", type: "string", default: "-", description: "Nome do card (BentoCard)" },
       { name: "description", type: "string", default: "-", description: "Descricao (BentoCard)" },
-      { name: "span", type: "1 | 2", default: "1", description: "Colunas que o card ocupa" },
+      { name: "Icon", type: "ComponentType", default: "-", description: "Icone do card" },
+      { name: "href", type: "string", default: "-", description: "Link do CTA" },
+      { name: "cta", type: "string", default: "-", description: "Texto do CTA" },
+      { name: "background", type: "ReactNode", default: "-", description: "Background do card" },
     ],
     codeExample: `import { BentoGrid, BentoCard } from "brasa.ui";
 
-<BentoGrid columns={3}>
-  <BentoCard title="Feature 1" description="Descricao..." span={2} />
-  <BentoCard title="Feature 2" description="Descricao..." />
-  <BentoCard title="Feature 3" description="Descricao..." />
+<BentoGrid className="lg:grid-rows-3">
+  <BentoCard
+    name="Pagamentos"
+    description="Pix, boleto e cartao."
+    cta="Saiba mais"
+    href="/docs"
+    className="lg:col-span-2 lg:row-span-2"
+  />
+  <BentoCard name="CPF & CNPJ" description="Mascara e validacao." />
+  <BentoCard name="Enderecos" description="CEP com auto-fill." />
 </BentoGrid>`,
   },
   {

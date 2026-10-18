@@ -8,12 +8,15 @@ const sidebarNav = [
     items: [
       { title: "Introducao", href: "/docs" },
       { title: "Instalacao", href: "/docs/installation" },
+      { title: "Contexto para IA", href: "/docs/ai-context" },
     ],
   },
   {
     title: "Componentes",
     items: [
       { title: "Galeria", href: "/componentes" },
+      { title: "Direções de design", href: "/directory" },
+      { title: "Criar contexto", href: "/create" },
     ],
   },
   {

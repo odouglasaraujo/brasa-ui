@@ -97,50 +97,52 @@ export interface StepProgressProps extends HTMLAttributes<HTMLDivElement> {
 export const StepProgress = forwardRef<HTMLDivElement, StepProgressProps>(
   ({ className = "", steps, currentStep, ...props }, ref) => {
     return (
-      <div ref={ref} className={`flex items-center gap-2 ${className}`} {...props}>
-        {steps.map((step, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <div className="flex items-center gap-2">
-              <div
-                className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold transition-colors duration-300 ${
-                  i < currentStep
-                    ? "bg-emerald-600 text-white"
-                    : i === currentStep
-                    ? "border-2 border-emerald-600 text-emerald-600"
-                    : "border border-neutral-200 text-neutral-400"
-                }`}
-              >
-                {i < currentStep ? (
-                  <svg
-                    className="h-3.5 w-3.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={3}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                ) : (
-                  i + 1
-                )}
+      <div ref={ref} className={`w-full ${className}`} {...props}>
+        <div className="flex items-center">
+          {steps.map((step, i) => (
+            <div key={i} className={`flex items-center ${i < steps.length - 1 ? "flex-1" : ""}`}>
+              <div className="flex flex-col items-center gap-1.5">
+                <div
+                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold transition-colors duration-300 ${
+                    i < currentStep
+                      ? "bg-emerald-600 text-white"
+                      : i === currentStep
+                      ? "border-2 border-emerald-600 text-emerald-600"
+                      : "border border-neutral-200 text-neutral-400"
+                  }`}
+                >
+                  {i < currentStep ? (
+                    <svg
+                      className="h-3.5 w-3.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={3}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    i + 1
+                  )}
+                </div>
+                <span
+                  className={`text-xs text-center ${
+                    i <= currentStep ? "font-medium text-neutral-900" : "text-neutral-400"
+                  }`}
+                >
+                  {step}
+                </span>
               </div>
-              <span
-                className={`text-sm whitespace-nowrap ${
-                  i <= currentStep ? "font-medium text-neutral-900" : "text-neutral-400"
-                }`}
-              >
-                {step}
-              </span>
+              {i < steps.length - 1 && (
+                <div
+                  className={`mx-2 mt-[-1.25rem] h-px flex-1 transition-colors duration-300 ${
+                    i < currentStep ? "bg-emerald-600" : "bg-neutral-200"
+                  }`}
+                />
+              )}
             </div>
-            {i < steps.length - 1 && (
-              <div
-                className={`h-px w-8 transition-colors duration-300 ${
-                  i < currentStep ? "bg-emerald-600" : "bg-neutral-200"
-                }`}
-              />
-            )}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     );
   }

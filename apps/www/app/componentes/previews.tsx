@@ -252,10 +252,15 @@ export const PREVIEWS: Record<string, React.ReactNode> = {
     </div>
   ),
   "bento-grid": (
-    <div className="w-full max-w-[300px]">
-      <BentoGrid columns={2}>
-        <BentoCard title="Pix" description="Instantaneo" />
-        <BentoCard title="Boleto" description="Ate 3 dias" />
+    <div className="w-full max-w-[280px]">
+      <BentoGrid className="auto-rows-[5rem] grid-cols-2 gap-2">
+        <BentoCard
+          name="Pagamentos"
+          description="Pix, boleto e cartao."
+          className="col-span-2"
+        />
+        <BentoCard name="CPF" description="Mascara." />
+        <BentoCard name="CEP" description="Auto-fill." />
       </BentoGrid>
     </div>
   ),
@@ -293,9 +298,9 @@ export const PREVIEWS: Record<string, React.ReactNode> = {
   ),
   "typing-animation": (
     <TypingAnimation
-      text="Componentes brasileiros"
-      duration={50}
-      className="text-sm font-medium text-neutral-800"
+      text="brasa.ui"
+      duration={80}
+      className="text-base font-semibold text-neutral-800"
     />
   ),
   "dot-pattern": (

@@ -2,21 +2,21 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "brasa.ui — Componentes brasileiros para a era da IA",
+  title: "brasa.ui — Design brasileiro. Contexto para IA.",
   description:
-    "CPF, Pix, CEP, boleto, parcelamento — componentes React prontos para produtos digitais brasileiros. AI-ready.",
+    "Biblioteca brasileira de componentes React com tokens, composições e contexto de design para IA. Explore direções visuais e exporte seu contexto.",
   metadataBase: new URL("https://brasa-ui.vercel.app"),
   openGraph: {
-    title: "brasa.ui — Componentes brasileiros para a era da IA",
+    title: "brasa.ui — Design brasileiro. Contexto para IA.",
     description:
-      "CPF, Pix, CEP, boleto, parcelamento — componentes React prontos para produtos digitais brasileiros. AI-ready.",
+      "Componentes, composições e decisões de design para criar produtos que entendem o Brasil. Sua IA também.",
     type: "website",
     locale: "pt_BR",
     siteName: "brasa.ui",
   },
   twitter: {
     card: "summary_large_image",
-    title: "brasa.ui — Componentes brasileiros para a era da IA",
+    title: "brasa.ui — Design brasileiro. Contexto para IA.",
     description:
       "CPF, Pix, CEP, boleto, parcelamento — componentes React prontos para produtos digitais brasileiros.",
   },

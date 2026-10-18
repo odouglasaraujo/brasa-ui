@@ -1,0 +1,15 @@
+/* Optional theme. Components include matching fallbacks. */
+:root {
+  --brasa-primary: #285b43;
+  --brasa-primary-hover: #1d4733;
+  --brasa-foreground: #23352c;
+  --brasa-muted: #6b766d;
+  --brasa-surface: #ffffff;
+  --brasa-background: #fafbf8;
+  --brasa-subtle: #f0f4ec;
+  --brasa-border: #dfe4dc;
+  --brasa-ring: #dce9df;
+  --brasa-accent: #dceab8;
+  --brasa-radius-control: 0.625rem;
+  --brasa-radius-card: 1rem;
+}

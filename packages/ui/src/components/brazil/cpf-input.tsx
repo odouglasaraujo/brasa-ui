@@ -1,6 +1,7 @@
 "use client";
 
-import { forwardRef, useCallback, useState, type ChangeEvent } from "react";
+import { controlStyles, controlBorder, controlError, labelStyles } from "../../utils/styles";
+import { forwardRef, useId, useCallback, useState, type ChangeEvent } from "react";
 import { maskCPF } from "../../utils/masks";
 import { validateCPF } from "../../utils/validators";
 
@@ -58,44 +59,42 @@ export const CPFInput = forwardRef<HTMLInputElement, CPFInputProps>(
       [controlledValue, onChange, onValidate]
     );
 
-    const inputId = id || "cpf-input";
-    const hasError = error || validationState === "invalid";
+    const generatedId = useId();
+    const inputId = id || generatedId;
+    const hasError = error || (showValidation && validationState === "invalid");
 
     return (
       <div className="space-y-1.5">
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-[13px] font-semibold text-neutral-700"
+            className={labelStyles}
           >
             {label}
           </label>
         )}
         <input
+          {...props}
           ref={ref}
           id={inputId}
           type="text"
           inputMode="numeric"
           placeholder="000.000.000-00"
           aria-invalid={!!hasError}
-          aria-describedby={
-            hasError
-              ? `${inputId}-error`
-              : showValidation && validationState === "valid"
-                ? `${inputId}-valid`
-                : undefined
-          }
+          aria-describedby={[
+            props["aria-describedby"],
+            hasError ? `${inputId}-error` : showValidation && validationState === "valid" ? `${inputId}-valid` : undefined,
+          ].filter(Boolean).join(" ") || undefined}
           value={currentValue}
           onChange={handleChange}
           maxLength={14}
-          className={`flex h-10 w-full rounded-xl border bg-white px-3.5 py-2 font-mono text-sm text-neutral-900 shadow-sm transition-all duration-150 placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+          className={`${controlStyles} font-mono ${
             hasError
-              ? "border-red-300 focus-visible:ring-red-400/40"
+              ? controlError
               : validationState === "valid"
-                ? "border-emerald-300 focus-visible:ring-emerald-500/40"
-                : "border-neutral-200 focus-visible:ring-emerald-500/40 hover:border-neutral-300"
+                ? "border-[#88a68b]"
+                : controlBorder
           } ${className}`}
-          {...props}
         />
         {error && (
           <p id={`${inputId}-error`} className="text-xs font-medium text-red-600" role="alert">
@@ -107,12 +106,12 @@ export const CPFInput = forwardRef<HTMLInputElement, CPFInputProps>(
             <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
-            CPF valido
+            CPF válido
           </p>
         )}
         {showValidation && !error && validationState === "invalid" && (
           <p id={`${inputId}-error`} className="text-xs font-medium text-red-600" role="alert">
-            CPF invalido
+            CPF inválido
           </p>
         )}
       </div>

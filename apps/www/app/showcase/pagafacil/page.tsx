@@ -588,7 +588,7 @@ export default function PagaFacilShowcase() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <main>
+      <main id="main-content">
         <HeroSection />
         <MetricsSection />
         <FeaturesSection />

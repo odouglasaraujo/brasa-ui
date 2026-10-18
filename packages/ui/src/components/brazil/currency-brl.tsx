@@ -1,6 +1,7 @@
 "use client";
 
-import { forwardRef, useCallback, useState, type ChangeEvent } from "react";
+import { labelStyles } from "../../utils/styles";
+import { forwardRef, useId, useCallback, useState, type ChangeEvent } from "react";
 
 export interface CurrencyBRLProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> {
@@ -54,7 +55,8 @@ export const CurrencyBRL = forwardRef<HTMLInputElement, CurrencyBRLProps>(
       [controlledValue, onChange]
     );
 
-    const inputId = id || "currency-brl";
+    const generatedId = useId();
+    const inputId = id || generatedId;
     const displayValue = formatCurrency(cents);
     const installmentValue = cents > 0 && maxInstallments > 1
       ? formatCurrency(Math.ceil(cents / maxInstallments))
@@ -65,34 +67,35 @@ export const CurrencyBRL = forwardRef<HTMLInputElement, CurrencyBRLProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-[13px] font-semibold text-neutral-700"
+            className={labelStyles}
           >
             {label}
           </label>
         )}
-        <div className={`flex items-center rounded-xl border bg-white shadow-sm transition-all duration-150 focus-within:ring-2 focus-within:ring-offset-2 ${
+        <div className={`flex h-10 items-center rounded-[var(--brasa-radius-control,0.625rem)] border bg-[var(--brasa-surface,#fff)] transition-shadow focus-within:ring-[3px] ${
           error
             ? "border-red-300 focus-within:ring-red-400/40"
-            : "border-neutral-200 focus-within:ring-emerald-500/40 hover:border-neutral-300"
+            : "border-[var(--brasa-border,#dfe4dc)] focus-within:border-[var(--brasa-primary,#285b43)] focus-within:ring-[var(--brasa-ring,#dce9df)] hover:border-[#b7c3b8]"
         }`}>
-          <span className="border-r border-neutral-200 bg-neutral-50 px-3.5 py-2 text-sm font-semibold text-neutral-500 rounded-l-xl">
+          <span className="border-r border-neutral-200 bg-[#f5f6f2] px-3.5 py-2 text-sm font-semibold text-neutral-500 rounded-l-[var(--brasa-radius-control,0.625rem)]">
             R$
           </span>
           <input
-            ref={ref}
+            {...props}
+          ref={ref}
             id={inputId}
             type="text"
             inputMode="numeric"
             placeholder="0,00"
             aria-invalid={!!error}
+            aria-describedby={[props["aria-describedby"], error ? `${inputId}-error` : null].filter(Boolean).join(" ") || undefined}
             value={displayValue}
             onChange={handleChange}
-            className={`flex-1 bg-transparent px-3.5 py-2 font-mono text-sm text-neutral-900 placeholder:text-neutral-400 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
-            {...props}
-          />
+            className={`min-w-0 flex-1 bg-transparent px-3.5 py-2 font-mono text-sm text-neutral-900 placeholder:text-neutral-400 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+            />
         </div>
         {error && (
-          <p className="text-xs font-medium text-red-600" role="alert">
+          <p id={`${inputId}-error`} className="text-xs font-medium text-red-600" role="alert">
             {error}
           </p>
         )}

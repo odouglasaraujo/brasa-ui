@@ -2,7 +2,7 @@
   <img src="https://img.shields.io/badge/🇧🇷-brasa.ui-059669?style=for-the-badge&labelColor=000" alt="brasa.ui" />
 </p>
 
-<h3 align="center">Componentes brasileiros para a era da IA</h3>
+<h3 align="center">Feita por brasileiros. Para quem constrói no Brasil.</h3>
 
 <p align="center">
   Componentes React com CPF, Pix, CEP, boleto e parcelamento — tipados, acessíveis, e com schema JSON para agentes de IA.
@@ -19,11 +19,11 @@
 
 ## Por que brasa.ui?
 
-Toda IA gera interfaces americanas por padrão. Tax ID, Zip Code, Credit Card, $149.90.
+Nossa identidade também se constrói em código. O brasa.ui reúne componentes, referências e decisões de design para criar produtos que nascem da nossa realidade e crescem com a comunidade.
 
-O Brasil precisa de **CPF, CEP, Pix, boleto, parcelamento, R$ 149,90**.
+CPF, CEP, Pix, reais e parcelamento fazem parte desse cuidado. Código React e contexto estruturado ajudam pessoas e ferramentas de IA a compor interfaces com identidade.
 
-brasa.ui resolve isso: componentes React prontos + schemas JSON que ensinam a qualquer IA como produtos brasileiros funcionam.
+A marca tem personalidade; os componentes se adaptam ao produto de quem usa. Consulte o [plano de evolução](docs/DIRECAO.md).
 
 ## Componentes
 

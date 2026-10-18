@@ -1,4 +1,7 @@
-import { forwardRef, useCallback, useMemo, useState, type InputHTMLAttributes } from "react";
+"use client";
+
+import { controlStyles, controlBorder, controlError } from "../../utils/styles";
+import { forwardRef, useId, useCallback, useMemo, useState, type InputHTMLAttributes } from "react";
 import { maskCPF, maskCNPJ, maskPhone } from "../../utils/masks";
 
 export type PixKeyType = "cpf" | "cnpj" | "email" | "phone" | "random" | "unknown";
@@ -76,11 +79,14 @@ export const PIXKeyInput = forwardRef<HTMLInputElement, PIXKeyInputProps>(
       label = "Chave Pix",
       error,
       showKeyType = true,
+      id,
       placeholder = "CPF, e-mail, telefone ou chave aleatória",
       ...props
     },
     ref
   ) => {
+    const generatedId = useId();
+    const inputId = id || generatedId;
     const [internalValue, setInternalValue] = useState("");
     const value = controlledValue ?? internalValue;
 
@@ -106,7 +112,7 @@ export const PIXKeyInput = forwardRef<HTMLInputElement, PIXKeyInputProps>(
     return (
       <div className={`w-full ${className}`}>
         {label && (
-          <label className="mb-1.5 flex items-center gap-2 text-sm font-medium text-neutral-700">
+          <label htmlFor={inputId} className="mb-1.5 flex items-center gap-2 text-sm font-medium text-neutral-700">
             {label}
             {showKeyType && value.length > 2 && keyType !== "unknown" && (
               <span
@@ -124,20 +130,23 @@ export const PIXKeyInput = forwardRef<HTMLInputElement, PIXKeyInputProps>(
             </svg>
           </div>
           <input
-            ref={ref}
+            {...props}
+          ref={ref}
+            id={inputId}
+            aria-invalid={!!error}
+            aria-describedby={[props["aria-describedby"], error ? `${inputId}-error` : null].filter(Boolean).join(" ") || undefined}
             type="text"
             value={value}
             onChange={handleChange}
             placeholder={placeholder}
-            className={`h-11 w-full rounded-xl border bg-white pl-9 pr-4 text-sm text-neutral-900 shadow-sm outline-none transition-all duration-150 placeholder:text-neutral-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 ${
+            className={`${controlStyles} pl-9 ${
               error
-                ? "border-red-300 focus:border-red-500 focus:ring-red-500/20"
-                : "border-neutral-200 hover:border-neutral-300"
+                ? controlError
+                : controlBorder
             }`}
-            {...props}
-          />
+            />
         </div>
-        {error && <p className="mt-1.5 text-xs text-red-500">{error}</p>}
+        {error && <p id={`${inputId}-error`} role="alert" className="mt-1.5 text-xs text-red-600">{error}</p>}
       </div>
     );
   }

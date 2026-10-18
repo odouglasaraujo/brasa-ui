@@ -5,6 +5,9 @@ import phoneBr from "./schemas/phone-br.json";
 import pixPayment from "./schemas/pix-payment.json";
 import installmentSelect from "./schemas/installment-select.json";
 
+export { directions, financialComposition, brazilianContext, getDirection, createDesignContext, contextAsMarkdown } from "./design-context";
+export type { DirectionId, Density } from "./design-context";
+
 export const schemas = {
   "cpf-input": cpfInput,
   "cep-input": cepInput,

@@ -1,11 +1,13 @@
-import { forwardRef, type SelectHTMLAttributes } from "react";
+"use client";
+
+import { forwardRef, useId, type SelectHTMLAttributes } from "react";
+import { controlStyles, controlBorder, controlError, labelStyles } from "../../utils/styles";
 
 export interface SelectOption {
   value: string;
   label: string;
   disabled?: boolean;
 }
-
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   error?: string;
@@ -14,49 +16,29 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ className = "", label, error, options, placeholder, id, ...props }, ref) => {
-    const selectId = id || label?.toLowerCase().replace(/\s+/g, "-");
-
+  ({ className = "", label, error, options, placeholder, id, "aria-describedby": describedBy, ...props }, ref) => {
+    const generatedId = useId();
+    const selectId = id ?? generatedId;
     return (
       <div className="space-y-1.5">
-        {label && (
-          <label
-            htmlFor={selectId}
-            className="block text-[13px] font-semibold text-neutral-700"
+        {label && <label htmlFor={selectId} className={labelStyles}>{label}</label>}
+        <div className="relative">
+          <select
+            ref={ref}
+            {...props}
+            id={selectId}
+            aria-invalid={error ? true : props["aria-invalid"]}
+            aria-describedby={[describedBy, error ? `${selectId}-error` : undefined].filter(Boolean).join(" ") || undefined}
+            className={`${controlStyles} appearance-none pr-9 ${error ? controlError : controlBorder} ${className}`}
           >
-            {label}
-          </label>
-        )}
-        <select
-          ref={ref}
-          id={selectId}
-          aria-invalid={!!error}
-          className={`flex h-10 w-full appearance-none rounded-xl border bg-white px-3.5 py-2 pr-8 text-sm text-neutral-900 shadow-sm transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
-            error
-              ? "border-red-300 focus-visible:ring-red-400/40"
-              : "border-neutral-200 focus-visible:ring-emerald-500/40 hover:border-neutral-300"
-          } ${className}`}
-          {...props}
-        >
-          {placeholder && (
-            <option value="" disabled>
-              {placeholder}
-            </option>
-          )}
-          {options.map((opt) => (
-            <option key={opt.value} value={opt.value} disabled={opt.disabled}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
-        {error && (
-          <p className="text-xs font-medium text-red-600" role="alert">
-            {error}
-          </p>
-        )}
+            {placeholder && <option value="" disabled>{placeholder}</option>}
+            {options.map((option) => <option key={option.value} value={option.value} disabled={option.disabled}>{option.label}</option>)}
+          </select>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="pointer-events-none absolute right-3 top-3 size-4 text-[#6b766d]"><path d="m8 10 4 4 4-4" /></svg>
+        </div>
+        {error && <p id={`${selectId}-error`} className="text-xs text-red-700" role="alert">{error}</p>}
       </div>
     );
   }
 );
-
 Select.displayName = "Select";

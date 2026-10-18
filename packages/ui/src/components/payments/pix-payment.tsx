@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { surfaceStyles, focusStyles } from "../../utils/styles";
 import { generateQR } from "../../utils/qrcode";
 
 export type PixPaymentStatus =
@@ -125,6 +126,7 @@ export function PixPayment({
   const [internalStatus, setInternalStatus] = useState<PixPaymentStatus>("qr_generated");
   const [timeLeft, setTimeLeft] = useState(expiresIn);
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
 
   const status = controlledStatus ?? internalStatus;
 
@@ -139,12 +141,15 @@ export function PixPayment({
     return () => clearInterval(timer);
   }, [status, timeLeft, onExpired]);
 
-  const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(effectivePixCode);
+  const handleCopy = useCallback(async () => {
+    try {
+    await navigator.clipboard.writeText(effectivePixCode);
+    setCopyError(false);
     setCopied(true);
     setInternalStatus("waiting_payment");
     onCopy?.();
     setTimeout(() => setCopied(false), 2000);
+    } catch { setCopyError(true); }
   }, [effectivePixCode, onCopy]);
 
   const timerColor =
@@ -154,7 +159,7 @@ export function PixPayment({
 
   if (status === "paid") {
     return (
-      <div className={`rounded-2xl border border-emerald-200 bg-gradient-to-b from-emerald-50 to-white p-8 text-center ${className}`}>
+      <div className={`rounded-2xl border border-emerald-200 bg-emerald-50 p-8 text-center ${className}`}>
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 ring-4 ring-emerald-50">
           <svg className="h-7 w-7 text-emerald-600" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -169,7 +174,7 @@ export function PixPayment({
 
   if (status === "expired") {
     return (
-      <div className={`rounded-2xl border border-neutral-200 bg-gradient-to-b from-neutral-50 to-white p-8 text-center ${className}`}>
+      <div className={`rounded-2xl border border-neutral-200 bg-neutral-50 p-8 text-center ${className}`}>
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-100">
           <svg className="h-7 w-7 text-neutral-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -183,7 +188,7 @@ export function PixPayment({
 
   if (status === "failed") {
     return (
-      <div className={`rounded-2xl border border-red-200 bg-gradient-to-b from-red-50 to-white p-8 text-center ${className}`}>
+      <div className={`rounded-2xl border border-red-200 bg-red-50 p-8 text-center ${className}`}>
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
           <svg className="h-7 w-7 text-red-600" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
@@ -196,18 +201,18 @@ export function PixPayment({
   }
 
   return (
-    <div className={`overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm ${className}`}>
+    <div className={`${surfaceStyles} overflow-hidden ${className}`}>
       {/* Header */}
-      <div className="border-b border-neutral-100 bg-gradient-to-r from-neutral-50 to-white px-6 py-4">
+      <div className="border-b border-neutral-100 bg-[#f5f7f2] px-6 py-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#32BCAD]">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#285b43]">
             <svg viewBox="0 0 24 24" className="h-4 w-4 text-white" fill="none" stroke="currentColor" strokeWidth={2.2}>
               <path d="M7 10l3-3 3 3M13 10l3-3 3 3M13 14l3 3 3-3M7 14l3 3 3-3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <div>
             <p className="text-xs font-medium uppercase tracking-wider text-neutral-400">Pagar com Pix</p>
-            <p className="text-xl font-bold tracking-tight text-neutral-900">{formatBRL(amount)}</p>
+            <p className="text-2xl font-semibold tracking-tight text-neutral-900">{formatBRL(amount)}</p>
           </div>
         </div>
         {beneficiary && (
@@ -252,10 +257,10 @@ export function PixPayment({
         <button
           type="button"
           onClick={handleCopy}
-          className={`flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all ${
+          className={`${focusStyles} flex h-10 w-full items-center justify-center gap-2 rounded-[var(--brasa-radius-control,0.625rem)] px-4 text-sm font-medium transition-colors ${
             copied
               ? "bg-emerald-600 text-white"
-              : "bg-neutral-900 text-white hover:bg-neutral-800 active:scale-[0.98]"
+              : "bg-[var(--brasa-primary,#285b43)] text-white hover:bg-[var(--brasa-primary-hover,#1d4733)]"
           }`}
         >
           {copied ? (
@@ -274,6 +279,7 @@ export function PixPayment({
             </>
           )}
         </button>
+        {copyError && <p role="alert" className="mt-2 text-xs text-red-600">Não foi possível copiar. Tente novamente.</p>}
         {status === "waiting_payment" && (
           <p className="mt-2 text-center text-xs text-neutral-400">
             Cole o código no app do seu banco para pagar

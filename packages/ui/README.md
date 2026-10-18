@@ -84,3 +84,24 @@ Every component includes a JSON schema at `@brasa-ui/registry` with props, behav
 ## License
 
 MIT
+
+## Visual theme
+
+The source and component registry include Brasa's warm surfaces, forest green accents, consistent control radii and visible focus states. The registry bundles `utils/styles.ts` with each component that uses it. Include copied `.ts` files in Tailwind's source scanning.
+
+For a package build containing this update, add to your CSS (adjust the source path relative to the CSS file):
+
+```css
+@import "tailwindcss";
+@import "brasa.ui/theme.css";
+@source "../node_modules/brasa.ui/dist";
+
+:root {
+  --brasa-primary: #285b43;
+  --brasa-primary-hover: #1d4733;
+  --brasa-radius-control: 0.625rem;
+  --brasa-radius-card: 1rem;
+}
+```
+
+The optional theme exports design tokens; Tailwind generates the component classes. Source/registry updates on the website do not imply a new npm release.

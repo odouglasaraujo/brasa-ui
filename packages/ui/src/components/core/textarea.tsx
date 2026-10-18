@@ -1,4 +1,7 @@
-import { forwardRef, type TextareaHTMLAttributes } from "react";
+"use client";
+
+import { forwardRef, useId, type TextareaHTMLAttributes } from "react";
+import { controlStyles, controlBorder, controlError, labelStyles } from "../../utils/styles";
 
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
@@ -7,44 +10,25 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className = "", label, error, hint, id, ...props }, ref) => {
-    const textareaId = id || label?.toLowerCase().replace(/\s+/g, "-");
-
+  ({ className = "", label, error, hint, id, "aria-describedby": describedBy, ...props }, ref) => {
+    const generatedId = useId();
+    const textareaId = id ?? generatedId;
+    const descriptionId = error ? `${textareaId}-error` : hint ? `${textareaId}-hint` : undefined;
     return (
       <div className="space-y-1.5">
-        {label && (
-          <label
-            htmlFor={textareaId}
-            className="block text-[13px] font-semibold text-neutral-700"
-          >
-            {label}
-          </label>
-        )}
+        {label && <label htmlFor={textareaId} className={labelStyles}>{label}</label>}
         <textarea
           ref={ref}
-          id={textareaId}
-          aria-invalid={!!error}
-          aria-describedby={error ? `${textareaId}-error` : hint ? `${textareaId}-hint` : undefined}
-          className={`flex min-h-[80px] w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-neutral-900 shadow-sm transition-all duration-150 placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
-            error
-              ? "border-red-300 focus-visible:ring-red-400/40"
-              : "border-neutral-200 focus-visible:ring-emerald-500/40 hover:border-neutral-300"
-          } ${className}`}
           {...props}
+          id={textareaId}
+          aria-invalid={error ? true : props["aria-invalid"]}
+          aria-describedby={[describedBy, descriptionId].filter(Boolean).join(" ") || undefined}
+          className={`${controlStyles} min-h-24 resize-y ${error ? controlError : controlBorder} ${className}`}
         />
-        {error && (
-          <p id={`${textareaId}-error`} className="text-xs font-medium text-red-600" role="alert">
-            {error}
-          </p>
-        )}
-        {hint && !error && (
-          <p id={`${textareaId}-hint`} className="text-xs text-neutral-500">
-            {hint}
-          </p>
-        )}
+        {error && <p id={`${textareaId}-error`} className="text-xs text-red-700" role="alert">{error}</p>}
+        {hint && !error && <p id={`${textareaId}-hint`} className="text-xs leading-5 text-[#6b766d]">{hint}</p>}
       </div>
     );
   }
 );
-
 Textarea.displayName = "Textarea";

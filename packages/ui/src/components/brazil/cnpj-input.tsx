@@ -1,6 +1,7 @@
 "use client";
 
-import { forwardRef, useState, useCallback, type InputHTMLAttributes } from "react";
+import { controlStyles, controlBorder, controlError, labelStyles } from "../../utils/styles";
+import { forwardRef, useId, useState, useCallback, type InputHTMLAttributes } from "react";
 import { maskCNPJ } from "../../utils/masks";
 import { validateCNPJ } from "../../utils/validators";
 
@@ -14,8 +15,10 @@ export interface CNPJInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
 }
 
 export const CNPJInput = forwardRef<HTMLInputElement, CNPJInputProps>(
-  ({ value: controlledValue, onChange, label, error, hint, showValidation = true, className = "", ...props }, ref) => {
+  ({ value: controlledValue, onChange, label, error, hint, showValidation = true, className = "", id, onBlur, ...props }, ref) => {
     const [internalValue, setInternalValue] = useState("");
+    const generatedId = useId();
+    const inputId = id || generatedId;
     const [touched, setTouched] = useState(false);
 
     const displayValue = controlledValue !== undefined ? maskCNPJ(controlledValue) : internalValue;
@@ -34,37 +37,39 @@ export const CNPJInput = forwardRef<HTMLInputElement, CNPJInputProps>(
       [controlledValue, onChange]
     );
 
-    const errorMessage = error || (showError ? "CNPJ invalido" : undefined);
+    const errorMessage = error || (showError ? "CNPJ inválido" : undefined);
 
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label className="text-[13px] font-semibold text-neutral-700">{label}</label>
+          <label htmlFor={inputId} className={labelStyles}>{label}</label>
         )}
         <input
+          {...props}
           ref={ref}
+          id={inputId}
           type="text"
           inputMode="numeric"
           placeholder="00.000.000/0000-00"
           value={displayValue}
           onChange={handleChange}
-          onBlur={() => setTouched(true)}
+          onBlur={(event) => { setTouched(true); onBlur?.(event); }}
           maxLength={18}
-          className={`h-10 rounded-xl border bg-white px-3.5 font-mono text-sm text-neutral-900 shadow-sm outline-none transition-all duration-150 placeholder:text-neutral-400 focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+          className={`${controlStyles} font-mono ${
             errorMessage
-              ? "border-red-300 focus-visible:ring-red-400/40"
+              ? controlError
               : touched && isComplete && isValid
-              ? "border-emerald-300 focus-visible:ring-emerald-500/40"
-              : "border-neutral-200 focus-visible:ring-emerald-500/40 hover:border-neutral-300"
+              ? "border-[#88a68b]"
+              : controlBorder
           } ${className}`}
           aria-invalid={!!errorMessage}
-          {...props}
+          aria-describedby={[props["aria-describedby"], errorMessage || hint ? `${inputId}-description` : null].filter(Boolean).join(" ") || undefined}
         />
         {errorMessage && (
-          <span className="text-xs font-medium text-red-600">{errorMessage}</span>
+          <span id={`${inputId}-description`} className="text-xs font-medium text-red-600">{errorMessage}</span>
         )}
         {!errorMessage && hint && (
-          <span className="text-xs text-neutral-500">{hint}</span>
+          <span id={`${inputId}-description`} className="text-xs text-neutral-500">{hint}</span>
         )}
       </div>
     );

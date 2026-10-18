@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { COMPONENTS, CATEGORY_LABELS, CATEGORY_COLORS, type ComponentCategory, type ComponentDoc } from "./data";
 import { PREVIEWS } from "./previews";
 import { ComponentDetail } from "./component-detail";
@@ -11,6 +11,13 @@ export function ComponentGallery() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<ComponentCategory | "all">("all");
   const [selected, setSelected] = useState<ComponentDoc | null>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const component = COMPONENTS.find(item => item.slug === params.get("component"));
+    if (component) setSelected(component);
+    if (params.get("q")) setSearch(params.get("q")!);
+  }, []);
 
   const filtered = useMemo(() => {
     let items = COMPONENTS;
@@ -51,7 +58,7 @@ export function ComponentGallery() {
             <span className="text-lg font-bold tracking-tight">brasa.ui</span>
           </a>
           <nav className="flex items-center gap-6 text-sm">
-            <a href="/" className="text-neutral-500 hover:text-neutral-900 transition-colors">Home</a>
+            <a href="/docs" className="text-neutral-500 hover:text-neutral-900 transition-colors">Docs</a>
             <span className="font-medium text-neutral-900">Componentes</span>
             <a href="/showcase" className="text-neutral-500 hover:text-neutral-900 transition-colors">Showcase</a>
             <a href="https://github.com/odouglasaraujo/brasa-ui" target="_blank" rel="noopener" className="text-neutral-500 hover:text-neutral-900 transition-colors">GitHub</a>
@@ -192,13 +199,16 @@ function ComponentCard({
   const colors = CATEGORY_COLORS[component.category];
 
   return (
-    <button
+    <div
+      role="button"
+      tabIndex={0}
       onClick={onClick}
-      className="group flex flex-col rounded-2xl border border-neutral-200 bg-white text-left shadow-sm transition-all hover:border-neutral-300 hover:shadow-lg hover:shadow-neutral-200/60 hover:-translate-y-0.5"
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(); } }}
+      className="group flex flex-col rounded-2xl border border-neutral-200 bg-white text-left shadow-sm transition-all hover:border-neutral-300 hover:shadow-lg hover:shadow-neutral-200/60 hover:-translate-y-0.5 cursor-pointer"
     >
       {/* Preview area */}
-      <div className="flex min-h-[140px] items-center justify-center p-6 border-b border-neutral-100 bg-neutral-50/80 rounded-t-2xl">
-        <div className="pointer-events-auto" onClick={(e) => e.stopPropagation()}>
+      <div className="flex min-h-[140px] items-center justify-center p-6 border-b border-neutral-100 bg-neutral-50/80 rounded-t-2xl overflow-hidden">
+        <div className="pointer-events-auto w-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
           {preview}
         </div>
       </div>
@@ -216,6 +226,6 @@ function ComponentCard({
         </div>
         <p className="text-xs text-neutral-500 line-clamp-2">{component.description}</p>
       </div>
-    </button>
+    </div>
   );
 }

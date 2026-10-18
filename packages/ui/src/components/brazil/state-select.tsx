@@ -1,31 +1,34 @@
-import { forwardRef, type SelectHTMLAttributes } from "react";
+"use client";
+
+import { controlStyles, controlBorder, controlError, labelStyles } from "../../utils/styles";
+import { forwardRef, useId, type SelectHTMLAttributes } from "react";
 
 const BRAZILIAN_STATES = [
   { value: "AC", label: "Acre" },
   { value: "AL", label: "Alagoas" },
-  { value: "AP", label: "Amapa" },
+  { value: "AP", label: "Amapá" },
   { value: "AM", label: "Amazonas" },
   { value: "BA", label: "Bahia" },
-  { value: "CE", label: "Ceara" },
+  { value: "CE", label: "Ceará" },
   { value: "DF", label: "Distrito Federal" },
-  { value: "ES", label: "Espirito Santo" },
-  { value: "GO", label: "Goias" },
-  { value: "MA", label: "Maranhao" },
+  { value: "ES", label: "Espírito Santo" },
+  { value: "GO", label: "Goiás" },
+  { value: "MA", label: "Maranhão" },
   { value: "MT", label: "Mato Grosso" },
   { value: "MS", label: "Mato Grosso do Sul" },
   { value: "MG", label: "Minas Gerais" },
-  { value: "PA", label: "Para" },
-  { value: "PB", label: "Paraiba" },
-  { value: "PR", label: "Parana" },
+  { value: "PA", label: "Pará" },
+  { value: "PB", label: "Paraíba" },
+  { value: "PR", label: "Paraná" },
   { value: "PE", label: "Pernambuco" },
-  { value: "PI", label: "Piaui" },
+  { value: "PI", label: "Piauí" },
   { value: "RJ", label: "Rio de Janeiro" },
   { value: "RN", label: "Rio Grande do Norte" },
   { value: "RS", label: "Rio Grande do Sul" },
-  { value: "RO", label: "Rondonia" },
+  { value: "RO", label: "Rondônia" },
   { value: "RR", label: "Roraima" },
   { value: "SC", label: "Santa Catarina" },
-  { value: "SP", label: "Sao Paulo" },
+  { value: "SP", label: "São Paulo" },
   { value: "SE", label: "Sergipe" },
   { value: "TO", label: "Tocantins" },
 ] as const;
@@ -41,7 +44,9 @@ export interface StateSelectProps extends Omit<SelectHTMLAttributes<HTMLSelectEl
 }
 
 export const StateSelect = forwardRef<HTMLSelectElement, StateSelectProps>(
-  ({ label, error, hint, placeholder = "Selecione o estado", format = "both", className = "", ...props }, ref) => {
+  ({ label, error, hint, placeholder = "Selecione o estado", format = "both", className = "", id, ...props }, ref) => {
+    const generatedId = useId();
+    const inputId = id || generatedId;
     const formatOption = (state: (typeof BRAZILIAN_STATES)[number]) => {
       switch (format) {
         case "code": return state.value;
@@ -53,17 +58,19 @@ export const StateSelect = forwardRef<HTMLSelectElement, StateSelectProps>(
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label className="text-[13px] font-semibold text-neutral-700">{label}</label>
+          <label htmlFor={inputId} className={labelStyles}>{label}</label>
         )}
         <select
+          {...props}
           ref={ref}
-          className={`h-10 appearance-none rounded-xl border bg-white px-3.5 pr-8 text-sm text-neutral-900 shadow-sm outline-none transition-all duration-150 focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+          id={inputId}
+          className={`${controlStyles} ${
             error
-              ? "border-red-300 focus-visible:ring-red-400/40"
-              : "border-neutral-200 focus-visible:ring-emerald-500/40 hover:border-neutral-300"
+              ? controlError
+              : controlBorder
           } ${className}`}
           aria-invalid={!!error}
-          {...props}
+          aria-describedby={[props["aria-describedby"], error || hint ? `${inputId}-description` : null].filter(Boolean).join(" ") || undefined}
         >
           <option value="">{placeholder}</option>
           {BRAZILIAN_STATES.map((state) => (
@@ -72,8 +79,8 @@ export const StateSelect = forwardRef<HTMLSelectElement, StateSelectProps>(
             </option>
           ))}
         </select>
-        {error && <span className="text-xs font-medium text-red-600">{error}</span>}
-        {!error && hint && <span className="text-xs text-neutral-500">{hint}</span>}
+        {error && <span id={`${inputId}-description`} className="text-xs font-medium text-red-600">{error}</span>}
+        {!error && hint && <span id={`${inputId}-description`} className="text-xs text-neutral-500">{hint}</span>}
       </div>
     );
   }

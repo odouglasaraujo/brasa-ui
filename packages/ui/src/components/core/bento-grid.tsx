@@ -1,22 +1,15 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import { forwardRef, type ComponentType, type HTMLAttributes, type ReactNode } from "react";
 
 export interface BentoGridProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
-  columns?: 2 | 3 | 4;
 }
 
-const columnClasses = {
-  2: "grid-cols-1 md:grid-cols-2",
-  3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
-  4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
-} as const;
-
 export const BentoGrid = forwardRef<HTMLDivElement, BentoGridProps>(
-  ({ className = "", columns = 3, children, ...props }, ref) => {
+  ({ className = "", children, ...props }, ref) => {
     return (
       <div
         ref={ref}
-        className={`grid gap-4 ${columnClasses[columns]} ${className}`}
+        className={`grid w-full auto-rows-[22rem] grid-cols-1 gap-4 md:grid-cols-3 ${className}`}
         {...props}
       >
         {children}
@@ -28,35 +21,50 @@ export const BentoGrid = forwardRef<HTMLDivElement, BentoGridProps>(
 BentoGrid.displayName = "BentoGrid";
 
 export interface BentoCardProps extends HTMLAttributes<HTMLDivElement> {
-  title: string;
+  name: string;
   description?: string;
-  icon?: ReactNode;
-  span?: 1 | 2;
-  children?: ReactNode;
+  Icon?: ComponentType<{ className?: string }>;
+  href?: string;
+  cta?: string;
+  background?: ReactNode;
 }
 
 export const BentoCard = forwardRef<HTMLDivElement, BentoCardProps>(
-  ({ className = "", title, description, icon, span = 1, children, ...props }, ref) => {
+  ({ className = "", name, description, Icon, href, cta, background, ...props }, ref) => {
     return (
       <div
         ref={ref}
-        className={`group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:border-neutral-300 ${
-          span === 2 ? "md:col-span-2" : ""
-        } ${className}`}
+        className={`group relative col-span-1 flex flex-col justify-end overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md ${className}`}
         {...props}
       >
-        {icon && (
-          <div className="mb-4 inline-flex rounded-xl border border-neutral-100 bg-neutral-50 p-2.5 text-neutral-600">
-            {icon}
+        {background && (
+          <div className="absolute inset-0 transition-all duration-300 [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] group-hover:scale-105">
+            {background}
           </div>
         )}
-        <h3 className="text-lg font-semibold text-neutral-900">{title}</h3>
-        {description && (
-          <p className="mt-1.5 text-sm leading-relaxed text-neutral-500">
-            {description}
-          </p>
+        <div className="pointer-events-none z-10 flex flex-col gap-1 p-4 md:p-6 transition-all duration-300 group-hover:-translate-y-2">
+          {Icon && (
+            <Icon className="h-8 w-8 md:h-10 md:w-10 text-neutral-600 transition-all duration-300 ease-in-out group-hover:scale-75 origin-left" />
+          )}
+          <h3 className="text-base md:text-lg font-semibold text-neutral-900">{name}</h3>
+          {description && (
+            <p className="max-w-lg text-xs md:text-sm text-neutral-500">{description}</p>
+          )}
+        </div>
+
+        {href && cta && (
+          <div className="pointer-events-none absolute bottom-0 flex w-full translate-y-10 flex-row items-center p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+            <a
+              href={href}
+              className="pointer-events-auto inline-flex items-center gap-1 text-sm font-medium text-emerald-600 hover:text-emerald-700"
+            >
+              {cta}
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+          </div>
         )}
-        {children && <div className="mt-4">{children}</div>}
       </div>
     );
   }

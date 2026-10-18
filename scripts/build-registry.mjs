@@ -343,7 +343,11 @@ for (const comp of components) {
   });
 
   // Add dependency files
-  for (const dep of comp.deps) {
+  const dependencies = [...comp.deps];
+  if (files.some(file => file.content.includes('@/lib/brasa/utils/styles'))) {
+    dependencies.push("utils/styles.ts");
+  }
+  for (const dep of dependencies) {
     const content = readSource(dep);
     const targetPath = `lib/brasa/${dep}`;
     // Avoid duplicate files
